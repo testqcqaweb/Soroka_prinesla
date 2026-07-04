@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { signOut } from "@/actions/auth";
 import { Logo } from "@/components/brand/logo";
 
 const navItems = [
@@ -32,12 +33,14 @@ export function AppHeader() {
           >
             + Проект
           </Link>
-          <div
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-[var(--santa-ink)] text-xs font-medium text-[var(--santa-cream)]"
-            title="Профиль"
-          >
-            SP
-          </div>
+          <form action={signOut}>
+            <button
+              type="submit"
+              className="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-[var(--santa-muted)] transition-colors hover:text-[var(--santa-cream)]"
+            >
+              Выйти
+            </button>
+          </form>
         </div>
       </div>
     </header>

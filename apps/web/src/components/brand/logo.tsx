@@ -5,7 +5,7 @@ import { BRAND } from "@/lib/brand";
 type LogoProps = {
   variant?: "full" | "mark" | "wordmark";
   size?: "sm" | "md" | "lg";
-  href?: string;
+  href?: string | null;
   className?: string;
 };
 
