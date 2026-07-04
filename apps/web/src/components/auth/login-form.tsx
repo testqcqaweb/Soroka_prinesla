@@ -2,15 +2,28 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { Logo } from "@/components/brand/logo";
 import { BRAND } from "@/lib/brand";
+import { getClientAuth } from "@/lib/firebase/client";
+import { isFirebaseConfigured } from "@/lib/firebase/config";
 
 export function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+
+  if (!isFirebaseConfigured()) {
+    return (
+      <div className="rounded-xl border border-[var(--santa-crimson)]/30 bg-[var(--santa-charcoal-soft)] p-6 text-sm text-[var(--santa-muted)]">
+        Firebase не настроен. Заполните переменные в <code>.env.local</code>.
+      </div>
+    );
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,21 +33,20 @@ export function LoginForm() {
     const formData = new FormData(event.currentTarget);
     const email = String(formData.get("email"));
     const password = String(formData.get("password"));
-    const supabase = createClient();
+    const auth = getClientAuth();
 
-    const result =
-      mode === "signin"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
-
-    if (result.error) {
-      setError(result.error.message);
+    try {
+      if (mode === "signin") {
+        await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        await createUserWithEmailAndPassword(auth, email, password);
+      }
+      router.push("/");
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Ошибка авторизации");
       setLoading(false);
-      return;
     }
-
-    router.push("/");
-    router.refresh();
   }
 
   return (

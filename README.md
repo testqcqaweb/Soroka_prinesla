@@ -2,9 +2,11 @@
 
 Личное веб-приложение продюсера-сценариста.
 
+**Стек:** Next.js · Firebase Auth · Cloud Firestore
+
 ## Фаза 1 — «Можно писать»
 
-- Auth (Supabase)
+- Auth (Firebase Email/Password)
 - Проекты CRUD
 - Дашборд
 - Редактор сценария (5 типов блоков)
@@ -13,18 +15,26 @@
 
 ## Быстрый старт
 
-### 1. Supabase
+### 1. Firebase
 
-1. Создайте проект на [supabase.com](https://supabase.com)
-2. SQL Editor → выполните `supabase/migrations/001_phase1.sql`
-3. Settings → API → скопируйте URL и `anon` key
+1. Создайте проект на [console.firebase.google.com](https://console.firebase.google.com)
+2. Добавьте **Web-приложение** → скопируйте config
+3. **Authentication** → включите **Email/Password**
+4. **Firestore** → создайте базу данных (production mode)
+5. Привяжите CLI и задеплойте правила:
+
+```bash
+npx -y firebase-tools@latest login
+npx -y firebase-tools@latest use your-project-id
+npx -y firebase-tools@latest deploy --only firestore
+```
 
 ### 2. Переменные окружения
 
 ```bash
 cd apps/web
 cp .env.example .env.local
-# заполните NEXT_PUBLIC_SUPABASE_URL и NEXT_PUBLIC_SUPABASE_ANON_KEY
+# заполните NEXT_PUBLIC_FIREBASE_* из Firebase Console
 ```
 
 ### 3. Запуск
@@ -35,8 +45,6 @@ npm install
 npm run dev
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000), зарегистрируйтесь и создайте проект.
-
 ## Маршруты
 
 | Путь | Описание |
@@ -46,14 +54,14 @@ npm run dev
 | `/projects/new` | Новый проект |
 | `/projects/[id]/script` | Редактор сценария |
 
-## Редактор сценария
+## Firestore структура
 
-**Типы блоков:** заголовок сцены, действие, персонаж, реплика, ремарка.
+```
+projects/{projectId}
+scripts/{scriptId}
+scripts/{scriptId}/versions/{versionId}  → blocks[] внутри документа
+```
 
-| Клавиша | Действие |
-|---------|----------|
-| `Tab` | Сменить тип блока |
-| `Enter` | Новый блок |
-| `Backspace` на пустом | Удалить блок |
+## Security Rules
 
-Автосохранение через 2 секунды после изменений. «Сохранить версию» создаёт новую ревизию.
+Прототип правил в `firestore.rules` — доступ только владельцу проекта. Перед публичным релизом стоит их перепроверить.

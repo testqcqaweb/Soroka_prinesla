@@ -2,12 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import {
-  loadScriptVersion,
-  saveScriptBlocks,
-  saveScriptVersion,
-} from "@/actions/script";
+import { useAuth } from "@/components/auth/auth-provider";
 import { SceneNav } from "@/components/script/scene-nav";
 import {
   insertBlockAfter,
@@ -15,18 +10,25 @@ import {
   removeBlock,
   ScriptBlockRow,
 } from "@/components/script/script-block-row";
+import {
+  loadScriptVersion,
+  saveScriptBlocks,
+  saveScriptVersion,
+} from "@/lib/firestore/projects";
 import type { ScriptEditorData } from "@/lib/types/database";
 import type { ScriptBlock, ScriptBlockType } from "@/lib/types/database";
 
 type ScriptEditorProps = {
   data: ScriptEditorData;
+  onReload: () => void;
 };
 
 type SaveState = "idle" | "saving" | "saved" | "error";
 
-export function ScriptEditor({ data }: ScriptEditorProps) {
-  const router = useRouter();
+export function ScriptEditor({ data, onReload }: ScriptEditorProps) {
+  const { user } = useAuth();
   const [blocks, setBlocks] = useState<ScriptBlock[]>(data.blocks);
+  const [versions, setVersions] = useState(data.versions);
   const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [versionNumber, setVersionNumber] = useState(data.version.version_number);
@@ -44,6 +46,7 @@ export function ScriptEditor({ data }: ScriptEditorProps) {
 
   useEffect(() => {
     setBlocks(data.blocks);
+    setVersions(data.versions);
     setVersionId(data.version.id);
     setVersionNumber(data.version.version_number);
     isDirty.current = false;
@@ -53,27 +56,26 @@ export function ScriptEditor({ data }: ScriptEditorProps) {
   const persistBlocks = useCallback(
     async (nextBlocks: ScriptBlock[]) => {
       setSaveState("saving");
-      const result = await saveScriptBlocks(
-        data.project.id,
-        versionId,
-        nextBlocks.map((b) => ({
-          id: b.id,
-          sort_order: b.sort_order,
-          type: b.type,
-          content: b.content,
-          scene_number: b.scene_number,
-        })),
-      );
-
-      if (result.error) {
+      try {
+        await saveScriptBlocks(
+          data.project.id,
+          data.script.id,
+          versionId,
+          nextBlocks.map((b) => ({
+            id: b.id,
+            sort_order: b.sort_order,
+            type: b.type,
+            content: b.content,
+            scene_number: b.scene_number,
+          })),
+        );
+        isDirty.current = false;
+        setSaveState("saved");
+      } catch {
         setSaveState("error");
-        return;
       }
-
-      isDirty.current = false;
-      setSaveState("saved");
     },
-    [data.project.id, versionId],
+    [data.project.id, data.script.id, versionId],
   );
 
   const scheduleAutosave = useCallback(() => {
@@ -148,33 +150,32 @@ export function ScriptEditor({ data }: ScriptEditorProps) {
   }
 
   function handleSaveVersion() {
+    if (!user) return;
+
     startVersionTransition(async () => {
       const note = window.prompt("Комментарий к версии (необязательно):") ?? undefined;
-      const result = await saveScriptVersion(
-        data.project.id,
-        data.script.id,
-        versionId,
-        blocksRef.current.map((b) => ({
-          id: b.id,
-          sort_order: b.sort_order,
-          type: b.type,
-          content: b.content,
-          scene_number: b.scene_number,
-        })),
-        note,
-      );
+      try {
+        const result = await saveScriptVersion(
+          data.project.id,
+          data.script.id,
+          user.uid,
+          blocksRef.current.map((b) => ({
+            id: b.id,
+            sort_order: b.sort_order,
+            type: b.type,
+            content: b.content,
+            scene_number: b.scene_number,
+          })),
+          note,
+        );
 
-      if (result.error) {
-        setSaveState("error");
-        return;
-      }
-
-      if (result.versionId && result.versionNumber) {
         setVersionId(result.versionId);
         setVersionNumber(result.versionNumber);
         isDirty.current = false;
         setSaveState("saved");
-        router.refresh();
+        onReload();
+      } catch {
+        setSaveState("error");
       }
     });
   }
@@ -184,9 +185,21 @@ export function ScriptEditor({ data }: ScriptEditorProps) {
       return;
     }
 
+    const target = versions.find((v) => v.id === targetVersionId);
+    if (!target) return;
+
     startVersionTransition(async () => {
-      await loadScriptVersion(data.project.id, data.script.id, targetVersionId);
-      router.refresh();
+      try {
+        await loadScriptVersion(
+          data.project.id,
+          data.script.id,
+          targetVersionId,
+          target.version_number,
+        );
+        onReload();
+      } catch {
+        setSaveState("error");
+      }
     });
   }
 
@@ -222,7 +235,7 @@ export function ScriptEditor({ data }: ScriptEditorProps) {
             onChange={(e) => handleLoadVersion(e.target.value)}
             className="rounded-lg border border-white/10 bg-[var(--santa-ink)] px-2 py-1.5 text-xs outline-none"
           >
-            {data.versions.map((v) => (
+            {versions.map((v) => (
               <option key={v.id} value={v.id}>
                 v{v.version_number}
                 {v.label ? ` — ${v.label}` : ""}

@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { signOut } from "@/actions/auth";
+import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
 import { Logo } from "@/components/brand/logo";
+import { getClientAuth } from "@/lib/firebase/client";
 
 const navItems = [
   { href: "/", label: "Проекты" },
@@ -8,6 +12,14 @@ const navItems = [
 ] as const;
 
 export function AppHeader() {
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await signOut(getClientAuth());
+    router.push("/login");
+    router.refresh();
+  }
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/8 bg-[var(--santa-charcoal)]/95 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
@@ -33,14 +45,13 @@ export function AppHeader() {
           >
             + Проект
           </Link>
-          <form action={signOut}>
-            <button
-              type="submit"
-              className="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-[var(--santa-muted)] transition-colors hover:text-[var(--santa-cream)]"
-            >
-              Выйти
-            </button>
-          </form>
+          <button
+            type="button"
+            onClick={handleSignOut}
+            className="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-[var(--santa-muted)] transition-colors hover:text-[var(--santa-cream)]"
+          >
+            Выйти
+          </button>
         </div>
       </div>
     </header>
