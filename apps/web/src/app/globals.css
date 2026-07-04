@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --santa-crimson: #8b1f24;
+  --santa-crimson-dark: #6b1519;
+  --santa-cream: #f4f0e8;
+  --santa-cream-muted: #e8e2d6;
+  --santa-charcoal: #141414;
+  --santa-charcoal-soft: #1e1e1e;
+  --santa-ink: #2a2a2a;
+  --santa-muted: #8a8580;
+
+  --background: var(--santa-charcoal);
+  --foreground: var(--santa-cream);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--santa-crimson) 40%, transparent);
+}
