@@ -6,7 +6,7 @@
 
 Next.js · TypeScript · Tailwind CSS
 
-## Запуск
+## Запуск локально
 
 ```bash
 cd apps/web
@@ -24,16 +24,28 @@ npm run dev
 apps/web/src/lib/content/portfolio.ts
 ```
 
-Там можно изменить имя, биографию, проекты, email, Telegram и услуги.
+## Публичная ссылка (GitHub Pages)
 
-## Деплой
+**Сайт:** https://testqcqaweb.github.io/Obsidian_design/
 
-Подойдёт [Vercel](https://vercel.com), [Netlify](https://netlify.com) или любой хостинг с поддержкой Next.js.
+### Первый запуск (один раз)
+
+1. Откройте [настройки Pages](https://github.com/testqcqaweb/Obsidian_design/settings/pages)
+2. **Build and deployment → Source:** выберите **Deploy from a branch**
+3. **Branch:** `gh-pages` → папка `/ (root)` → **Save**
+4. Подождите 1–2 минуты — сайт откроется по ссылке выше
+
+### Обновление сайта после правок
+
+Каждый push в ветку `main` автоматически пересобирает и выкладывает сайт.
+
+Вручную:
 
 ```bash
-npm run build
-npm start
+bash scripts/deploy-gh-pages.sh
 ```
+
+Или через GitHub Actions: **Actions → Deploy portfolio to GitHub Pages → Run workflow**.
 
 ## Бренд
 
@@ -43,4 +55,4 @@ npm start
 | Crimson | `#8B1F24` |
 | Фон | `#0C0C0C` |
 
-Логотип: текстовый wordmark в `apps/web/src/components/brand/logo.tsx`
+Логотип: `apps/web/src/components/brand/logo.tsx`
