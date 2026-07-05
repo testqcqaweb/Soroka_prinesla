@@ -16,10 +16,10 @@ git config user.email "github-actions[bot]@users.noreply.github.com"
 git add -A
 git commit -q -m "Deploy $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 git branch -M gh-pages
-git push -f "https://github.com/testqcqaweb/Obsidian_design.git" gh-pages
+git push -f "https://github.com/testqcqaweb/Soroka_prinesla.git" gh-pages
 
 echo ""
 echo "✓ Deployed to gh-pages branch"
-echo "→ Enable Pages once: https://github.com/testqcqaweb/Obsidian_design/settings/pages"
+echo "→ Enable Pages once: https://github.com/testqcqaweb/Soroka_prinesla/settings/pages"
 echo "   Source: branch gh-pages, folder / (root)"
-echo "→ Your link: https://testqcqaweb.github.io/Obsidian_design/"
+echo "→ Your link: https://testqcqaweb.github.io/Soroka_prinesla/"
