@@ -5,6 +5,9 @@ import { SiteHeader } from "@/components/portfolio/site-header";
 import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin", "cyrillic"],
@@ -21,14 +24,15 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${BRAND.tagline} — ${BRAND.name}`,
     template: `%s · ${BRAND.shortName}`,
   },
   description: BRAND.description,
   icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg",
+    icon: `${basePath}/icon.svg`,
+    apple: `${basePath}/icon.svg`,
   },
   openGraph: {
     title: `${BRAND.tagline} — ${BRAND.name}`,

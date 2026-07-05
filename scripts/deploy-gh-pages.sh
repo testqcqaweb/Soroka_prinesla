@@ -7,7 +7,7 @@ OUT="$ROOT/apps/web/out"
 echo "→ Building static site for GitHub Pages..."
 cd "$ROOT/apps/web"
 GITHUB_PAGES=true npm run build
-touch out/.nojekyll
+cp out/index.html out/404.html
 
 echo "→ Publishing to gh-pages branch..."
 cd "$OUT"

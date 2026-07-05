@@ -5,11 +5,16 @@ const repoBasePath = "/Soroka_prinesla";
 
 const nextConfig: NextConfig = {
   output: "export",
-  trailingSlash: true,
   basePath: isGithubPages ? repoBasePath : "",
-  assetPrefix: isGithubPages ? `https://testqcqaweb.github.io${repoBasePath}/` : undefined,
+  assetPrefix: isGithubPages ? `${repoBasePath}/` : undefined,
   images: {
     unoptimized: true,
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubPages ? repoBasePath : "",
+    NEXT_PUBLIC_SITE_URL: isGithubPages
+      ? `https://testqcqaweb.github.io${repoBasePath}`
+      : "http://localhost:3000",
   },
 };
 
