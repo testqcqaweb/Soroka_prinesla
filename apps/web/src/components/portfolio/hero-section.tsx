@@ -24,9 +24,11 @@ export function HeroSection() {
           className="animate-fade-up-delay-1 max-w-4xl font-[family-name:var(--font-playfair)] text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
-          <span className="text-gradient">{SITE.name}</span>
+          <span className="text-gradient">{SITE.fullName}</span>
           <br />
-          <span className="text-[var(--santa-cream)]">{SITE.role}</span>
+          <span className="text-[var(--santa-cream)]/90 text-4xl sm:text-5xl lg:text-6xl">
+            {SITE.role}
+          </span>
         </h1>
 
         <p className="animate-fade-up-delay-2 mt-8 max-w-2xl text-lg leading-relaxed text-[var(--santa-muted)] sm:text-xl">
@@ -38,7 +40,7 @@ export function HeroSection() {
             href="#work"
             className="rounded-xl bg-[var(--santa-crimson)] px-6 py-3 text-sm font-medium text-[var(--santa-cream)] transition-all hover:bg-[var(--santa-crimson-dark)] hover:shadow-lg hover:shadow-[var(--santa-crimson)]/20"
           >
-            Смотреть работы
+            Смотреть проекты
           </a>
           <a
             href="#contact"

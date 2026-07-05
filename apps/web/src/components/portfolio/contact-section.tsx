@@ -19,10 +19,11 @@ export function ContactSection() {
               className="mt-4 text-3xl font-medium text-[var(--santa-cream)] sm:text-5xl"
               style={{ fontFamily: "var(--font-playfair), serif" }}
             >
-              Давайте сделаем что-то сильное
+              {SITE.fullName}
             </h2>
             <p className="mt-4 text-[var(--santa-muted)]">
-              Напишите — обсудим идею, сценарий или продюсирование. Отвечаю в течение 1–2 дней.
+              Напишите или позвоните — обсудим сценарий, поэтический проект, клип или продюсирование
+              события.
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
@@ -33,12 +34,10 @@ export function ContactSection() {
                 {SITE.email}
               </a>
               <a
-                href={`https://t.me/${SITE.telegram.replace("@", "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={SITE.phoneHref}
                 className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--santa-cream)] transition-colors hover:bg-white/5"
               >
-                Telegram {SITE.telegram}
+                {SITE.phone}
               </a>
             </div>
 

@@ -9,7 +9,7 @@ export function AboutSection() {
         <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-5 text-lg leading-relaxed text-[var(--santa-cream)]/85">
             {ABOUT.bio.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
           </div>
 
@@ -31,15 +31,40 @@ export function AboutSection() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap gap-2">
-          {ABOUT.skills.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full border border-white/10 bg-[var(--santa-ink)] px-4 py-1.5 text-sm text-[var(--santa-muted)]"
-            >
-              {skill}
-            </span>
-          ))}
+        <div className="mt-12">
+          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--santa-muted)]">
+            Ключевые компетенции
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {ABOUT.competencies.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full border border-white/10 bg-[var(--santa-ink)] px-4 py-1.5 text-sm text-[var(--santa-muted)]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--santa-muted)]">
+            Языки
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {ABOUT.languages.map(({ lang, level }) => (
+              <span
+                key={lang}
+                className="text-sm text-[var(--santa-cream)]/80"
+              >
+                {lang}
+                {level && (
+                  <span className="ml-1 text-[var(--santa-muted)]">({level})</span>
+                )}
+              </span>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-[var(--santa-muted)]">{ABOUT.extra}</p>
         </div>
       </div>
     </section>

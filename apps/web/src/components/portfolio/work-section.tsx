@@ -7,12 +7,12 @@ export function WorkSection() {
   return (
     <section id="work" className="section-padding border-t border-white/8 bg-[var(--santa-charcoal-soft)]/50">
       <div className="container-wide">
-        <SectionLabel>Работы</SectionLabel>
+        <SectionLabel>Творческие проекты</SectionLabel>
         <h2
           className="mt-4 max-w-2xl text-3xl font-medium leading-tight text-[var(--santa-cream)] sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
-          Избранные проекты
+          Избранные творческие проекты
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
