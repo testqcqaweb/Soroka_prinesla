@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { AuthGuard } from "@/components/auth/auth-guard";
-import { AuthProvider } from "@/components/auth/auth-provider";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { SiteFooter } from "@/components/portfolio/site-footer";
+import { SiteHeader } from "@/components/portfolio/site-header";
 import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
@@ -15,15 +15,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin", "cyrillic"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: BRAND.name,
+    default: `${BRAND.tagline} — ${BRAND.name}`,
     template: `%s · ${BRAND.shortName}`,
   },
   description: BRAND.description,
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
+  },
+  openGraph: {
+    title: `${BRAND.tagline} — ${BRAND.name}`,
+    description: BRAND.description,
+    type: "website",
   },
 };
 
@@ -35,12 +45,13 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <AuthProvider>
-          <AuthGuard>{children}</AuthGuard>
-        </AuthProvider>
+        <div className="film-grain" aria-hidden />
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

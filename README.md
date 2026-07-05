@@ -1,50 +1,12 @@
-# Santa Prod.
+# Santa Prod. — Портфолио
 
-Личное веб-приложение продюсера-сценариста.
+Личный сайт продюсера и сценариста. Публичный, без авторизации.
 
-**Стек:** Next.js · Firebase Auth · Cloud Firestore
+## Стек
 
-## Фаза 1 — «Можно писать»
+Next.js · TypeScript · Tailwind CSS
 
-- Auth (Firebase Email/Password)
-- Проекты CRUD
-- Дашборд
-- Редактор сценария (5 типов блоков)
-- Автосохранение + «Сохранить версию»
-- Оглавление сцен
-
-## Фаза 1.5 — «Можно координировать»
-
-- Обзор проекта
-- Задачи (канбан)
-- Календарь / дедлайны
-- Разработка: синопсис, персонажи, beat sheet
-
-## Быстрый старт
-
-### 1. Firebase
-
-1. Создайте проект на [console.firebase.google.com](https://console.firebase.google.com)
-2. Добавьте **Web-приложение** → скопируйте config
-3. **Authentication** → включите **Email/Password**
-4. **Firestore** → создайте базу данных (production mode)
-5. Привяжите CLI и задеплойте правила:
-
-```bash
-npx -y firebase-tools@latest login
-npx -y firebase-tools@latest use your-project-id
-npx -y firebase-tools@latest deploy --only firestore
-```
-
-### 2. Переменные окружения
-
-```bash
-cd apps/web
-cp .env.example .env.local
-# заполните NEXT_PUBLIC_FIREBASE_* из Firebase Console
-```
-
-### 3. Запуск
+## Запуск
 
 ```bash
 cd apps/web
@@ -52,23 +14,33 @@ npm install
 npm run dev
 ```
 
-## Маршруты
+Откройте [http://localhost:3000](http://localhost:3000).
 
-| Путь | Описание |
-|------|----------|
-| `/login` | Вход / регистрация |
-| `/` | Дашборд проектов |
-| `/projects/new` | Новый проект |
-| `/projects/[id]/script` | Редактор сценария |
+## Редактирование контента
 
-## Firestore структура
+Весь текст сайта — в одном файле:
 
 ```
-projects/{projectId}
-scripts/{scriptId}
-scripts/{scriptId}/versions/{versionId}  → blocks[] внутри документа
+apps/web/src/lib/content/portfolio.ts
 ```
 
-## Security Rules
+Там можно изменить имя, биографию, проекты, email, Telegram и услуги.
 
-Прототип правил в `firestore.rules` — доступ только владельцу проекта. Перед публичным релизом стоит их перепроверить.
+## Деплой
+
+Подойдёт [Vercel](https://vercel.com), [Netlify](https://netlify.com) или любой хостинг с поддержкой Next.js.
+
+```bash
+npm run build
+npm start
+```
+
+## Бренд
+
+| Элемент | Значение |
+|---------|----------|
+| Название | Santa Prod. |
+| Crimson | `#8B1F24` |
+| Фон | `#0C0C0C` |
+
+Логотип: `apps/web/public/santa-prod-logo.png`
