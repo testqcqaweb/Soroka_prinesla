@@ -12,6 +12,16 @@ export const SITE = {
   phoneHref: "tel:+375298312554",
   location: "Брест, Беларусь",
   available: true,
+  social: {
+    instagram: {
+      label: "@sorokaprineslaa",
+      href: "https://www.instagram.com/sorokaprineslaa",
+    },
+    telegram: {
+      label: "@sorokaprineslaa",
+      href: "https://t.me/sorokaprineslaa",
+    },
+  },
 } as const;
 
 export const ABOUT = {
@@ -58,6 +68,7 @@ export type WorkItem = {
   description: string;
   tags: string[];
   featured?: boolean;
+  videoUrl?: string | null;
 };
 
 export const WORK: WorkItem[] = [
@@ -109,6 +120,7 @@ export const WORK: WorkItem[] = [
     description:
       "Режиссура клипов на VHS (Sony CCD-TRV67E) для рок-фестиваля «Солнцестояние 2025».",
     tags: ["VHS", "клип", "фестиваль"],
+    videoUrl: null,
   },
   {
     slug: "vhs-bulvar",
@@ -118,6 +130,7 @@ export const WORK: WorkItem[] = [
     role: "Режиссёр",
     description: "Режиссура клипов на VHS для кафе «Бульвар» — авторский визуальный язык и монтаж.",
     tags: ["VHS", "клип", "Брест"],
+    videoUrl: null,
   },
   {
     slug: "filarmonia",

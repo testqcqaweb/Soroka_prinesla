@@ -1,4 +1,4 @@
-import { WORK } from "@/lib/content/portfolio";
+import { WORK, type WorkItem } from "@/lib/content/portfolio";
 
 export function WorkSection() {
   const featured = WORK.filter((w) => w.featured);
@@ -42,6 +42,7 @@ export function WorkSection() {
                   </span>
                 </div>
                 <p className="mt-4 text-[var(--santa-muted)] leading-relaxed">{item.description}</p>
+                <ProjectLinks item={item} />
                 <div className="mt-6 flex flex-wrap gap-2">
                   {item.tags.map((tag) => (
                     <span
@@ -71,6 +72,7 @@ export function WorkSection() {
                 <p className="mt-2 text-sm text-[var(--santa-muted)] line-clamp-2">
                   {item.description}
                 </p>
+                <ProjectLinks item={item} compact />
               </article>
             ))}
           </div>
@@ -86,4 +88,29 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
       {children}
     </p>
   );
+}
+
+function ProjectLinks({ item, compact }: { item: WorkItem; compact?: boolean }) {
+  if (item.videoUrl) {
+    return (
+      <a
+        href={item.videoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex text-[var(--santa-crimson)] hover:underline ${compact ? "mt-3 text-xs" : "mt-4 text-sm"}`}
+      >
+        Смотреть на YouTube →
+      </a>
+    );
+  }
+
+  if (item.tags.includes("VHS")) {
+    return (
+      <p className={`text-[var(--santa-muted)]/70 ${compact ? "mt-3 text-xs" : "mt-4 text-sm"}`}>
+        Видео скоро на YouTube
+      </p>
+    );
+  }
+
+  return null;
 }

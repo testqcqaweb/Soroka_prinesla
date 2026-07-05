@@ -26,7 +26,7 @@ export function ContactSection() {
               события.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={`mailto:${SITE.email}`}
                 className="inline-flex items-center justify-center rounded-xl bg-[var(--santa-crimson)] px-6 py-3.5 text-sm font-medium text-[var(--santa-cream)] transition-colors hover:bg-[var(--santa-crimson-dark)]"
@@ -39,9 +39,28 @@ export function ContactSection() {
               >
                 {SITE.phone}
               </a>
+              <a
+                href={SITE.social.telegram.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--santa-cream)] transition-colors hover:bg-white/5"
+              >
+                Telegram
+              </a>
+              <a
+                href={SITE.social.instagram.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--santa-cream)] transition-colors hover:bg-white/5"
+              >
+                Instagram
+              </a>
             </div>
 
-            <p className="mt-8 text-sm text-[var(--santa-muted)]">{SITE.location}</p>
+            <p className="mt-6 text-xs text-[var(--santa-muted)]">
+              {SITE.social.telegram.label} · {SITE.social.instagram.label}
+            </p>
+            <p className="mt-2 text-sm text-[var(--santa-muted)]">{SITE.location}</p>
           </div>
         </div>
       </div>
