@@ -58,7 +58,7 @@ export function ContactSection() {
             </div>
 
             <p className="mt-6 text-xs text-[var(--brand-muted)]">
-              {SITE.social.telegram.label} · {SITE.social.instagram.label}
+              {SITE.social.telegram.label}
             </p>
             <p className="mt-2 text-sm text-[var(--brand-muted)]">{SITE.location}</p>
           </div>
