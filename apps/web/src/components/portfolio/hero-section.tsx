@@ -1,4 +1,4 @@
-import { BRAND } from "@/lib/brand";
+import { Logo } from "@/components/brand/logo";
 import { SITE } from "@/lib/content/portfolio";
 
 export function HeroSection() {
@@ -16,9 +16,9 @@ export function HeroSection() {
       <div className="absolute inset-x-0 top-1/3 h-px bg-gradient-to-r from-transparent via-[var(--brand-crimson)]/30 to-transparent" />
 
       <div className="container-wide section-padding relative z-10 w-full">
-        <p className="animate-fade-up mb-6 text-sm font-medium uppercase tracking-[0.35em] text-[var(--brand-crimson)]">
-          {BRAND.name}
-        </p>
+        <div className="animate-fade-up mb-6">
+          <Logo href={null} variant="wordmark" size="lg" />
+        </div>
 
         <h1
           className="animate-fade-up-delay-1 max-w-4xl font-[family-name:var(--font-playfair)] text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
