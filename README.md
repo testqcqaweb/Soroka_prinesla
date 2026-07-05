@@ -26,11 +26,11 @@ apps/web/src/lib/content/portfolio.ts
 
 ## Публичная ссылка (GitHub Pages)
 
-**Сайт:** https://testqcqaweb.github.io/Obsidian_design/
+**Сайт:** https://testqcqaweb.github.io/Soroka_prinesla/
 
 ### Первый запуск (один раз)
 
-1. Откройте [настройки Pages](https://github.com/testqcqaweb/Obsidian_design/settings/pages)
+1. Откройте [настройки Pages](https://github.com/testqcqaweb/Soroka_prinesla/settings/pages)
 2. **Build and deployment → Source:** выберите **Deploy from a branch**
 3. **Branch:** `gh-pages` → папка `/ (root)` → **Save**
 4. Подождите 1–2 минуты — сайт откроется по ссылке выше
