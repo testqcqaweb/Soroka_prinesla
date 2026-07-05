@@ -5,15 +5,9 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      className="border-t"
-      style={{
-        borderColor: "var(--footer-border)",
-        background: "var(--main-bg)",
-      }}
-    >
+    <footer className="border-t border-white/8 bg-[var(--brand-charcoal-soft)]">
       <div className="container-wide flex flex-col items-center justify-between gap-6 py-10 sm:flex-row">
-        <p className="text-sm" style={{ color: "var(--footer-text)" }}>
+        <p className="text-sm text-[var(--brand-muted)]">
           © {year} {SITE.fullName} · {BRAND.name}
         </p>
         <div className="flex items-center gap-4 text-sm">
@@ -21,8 +15,7 @@ export function SiteFooter() {
             href={SITE.social.telegram.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium transition-opacity hover:opacity-75"
-            style={{ color: "var(--footer-link-color)" }}
+            className="text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-cream)]"
           >
             Telegram
           </a>
@@ -30,8 +23,7 @@ export function SiteFooter() {
             href={SITE.social.instagram.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium transition-opacity hover:opacity-75"
-            style={{ color: "var(--footer-link-color)" }}
+            className="text-[var(--brand-muted)] transition-colors hover:text-[var(--brand-cream)]"
           >
             Instagram
           </a>

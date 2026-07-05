@@ -1,66 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Palette Colors */
-  --color-1: #ee71ad;
-  --color-2: #febb63;
-  --color-3: #5c79f8;
-  --color-4: #e12a74;
+  --brand-crimson: #8b1f24;
+  --brand-crimson-dark: #6b1519;
+  --brand-cream: #f4f0e8;
+  --brand-cream-muted: #e8e2d6;
+  --brand-charcoal: #0c0c0c;
+  --brand-charcoal-soft: #161616;
+  --brand-ink: #1f1f1f;
+  --brand-muted: #8a8580;
 
-  /* Banner Colors */
-  --banner-bg: #febb63ee;
-  --banner-text: #e12a74;
-  --banner-border: rgba(92, 121, 248, 0.3);
-
-  /* Main Background */
-  --main-bg: #febb63;
-
-  /* Header Colors */
-  --header-bg: linear-gradient(135deg, #ee71ad 0%, #e84d92 50%, #e12a74 100%);
-  --header-border: rgba(92, 121, 248, 0.3);
-  --header-badge-bg: rgba(254, 187, 99, 0.3);
-  --header-badge-text: #e12a74;
-  --header-title-text: #febb63;
-  --header-desc-text: #febb63;
-
-  /* Hero Section Colors */
-  --hero-title-color: #e12a74;
-  --hero-desc-color: #5c79f8;
-  --primary-button-bg: #febb63;
-  --primary-button-text: #e12a74;
-  --secondary-button-bg: #febb63;
-  --secondary-button-text: #e12a74;
-  --secondary-button-border: #ee71ad;
-
-  /* Features Section Colors */
-  --feature-title-color: #e12a74;
-  --feature-desc-color: #5c79f8;
-  --feature-card-bg: #ee71ad;
-  --feature-card-border: rgba(92, 121, 248, 0.4);
-  --feature-icon-bg: #febb63;
-  --feature-title-text-color: #febb63;
-
-  /* Palette Showcase Colors */
-  --palette-title-color: #e12a74;
-  --palette-desc-color: #5c79f8;
-  --palette-card-bg: #febb63;
-  --palette-label-color: #e12a74;
-  --palette-border: rgba(92, 121, 248, 0.2);
-
-  /* CTA Section Colors */
-  --cta-bg: linear-gradient(135deg, #ee71ad 0%, #febb63 100%);
-  --cta-title-text: #febb63;
-  --cta-desc-text: #febb63;
-  --cta-button-bg: #febb63;
-  --cta-button-text: #e12a74;
-
-  /* Footer Colors */
-  --footer-border: rgba(92, 121, 248, 0.2);
-  --footer-text: #5c79f8;
-  --footer-link-color: #e12a74;
-
-  --background: var(--main-bg);
-  --foreground: var(--hero-desc-color);
+  --background: var(--brand-charcoal);
+  --foreground: var(--brand-cream);
 }
 
 @theme inline {
@@ -76,14 +27,13 @@ html {
 }
 
 body {
-  background: var(--main-bg);
-  color: var(--hero-desc-color);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-4) 35%, transparent);
-  color: var(--color-4);
+  background: color-mix(in srgb, var(--brand-crimson) 45%, transparent);
 }
 
 @keyframes fade-up {
@@ -94,6 +44,15 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
   }
 }
 
@@ -112,9 +71,9 @@ body {
 .text-gradient {
   background: linear-gradient(
     135deg,
-    var(--color-4) 0%,
-    var(--color-1) 50%,
-    var(--color-3) 100%
+    var(--brand-cream) 0%,
+    var(--brand-cream-muted) 40%,
+    color-mix(in srgb, var(--brand-crimson) 60%, var(--brand-cream)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -126,8 +85,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 50;
-  opacity: 0.04;
-  mix-blend-mode: multiply;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -137,45 +95,4 @@ body {
 
 .container-wide {
   @apply mx-auto max-w-6xl;
-}
-
-.section-label {
-  @apply text-sm font-medium uppercase tracking-[0.35em];
-  color: var(--feature-title-color);
-}
-
-.btn-primary {
-  @apply inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium transition-all;
-  background: var(--primary-button-bg);
-  color: var(--primary-button-text);
-}
-
-.btn-primary:hover {
-  filter: brightness(0.95);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-4) 25%, transparent);
-}
-
-.btn-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-medium transition-colors;
-  background: var(--secondary-button-bg);
-  color: var(--secondary-button-text);
-  border-color: var(--secondary-button-border);
-}
-
-.btn-secondary:hover {
-  filter: brightness(0.97);
-}
-
-.feature-card {
-  @apply rounded-2xl border p-6 sm:p-8;
-  background: var(--feature-card-bg);
-  border-color: var(--feature-card-border);
-}
-
-.feature-card-title {
-  color: var(--feature-title-text-color);
-}
-
-.feature-card-desc {
-  color: color-mix(in srgb, var(--feature-title-text-color) 85%, var(--color-3));
 }

@@ -2,33 +2,26 @@ import { SITE } from "@/lib/content/portfolio";
 
 export function ContactSection() {
   return (
-    <section
-      id="contact"
-      className="section-padding border-t"
-      style={{ borderColor: "var(--palette-border)" }}
-    >
+    <section id="contact" className="section-padding border-t border-white/8">
       <div className="container-wide">
-        <div
-          className="relative overflow-hidden rounded-3xl border p-8 sm:p-12 lg:p-16"
-          style={{
-            background: "var(--cta-bg)",
-            borderColor: "var(--feature-card-border)",
-          }}
-        >
+        <div className="relative overflow-hidden rounded-3xl border border-[var(--brand-crimson)]/25 bg-gradient-to-br from-[var(--brand-charcoal-soft)] to-[var(--brand-ink)] p-8 sm:p-12 lg:p-16">
+          <div
+            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-20 blur-3xl"
+            style={{ background: "var(--brand-crimson)" }}
+            aria-hidden
+          />
+
           <div className="relative max-w-2xl">
-            <p className="section-label" style={{ color: "var(--cta-title-text)" }}>
+            <p className="text-sm font-medium uppercase tracking-[0.35em] text-[var(--brand-crimson)]">
               Контакт
             </p>
             <h2
-              className="mt-4 text-3xl font-medium sm:text-5xl"
-              style={{
-                fontFamily: "var(--font-playfair), serif",
-                color: "var(--cta-title-text)",
-              }}
+              className="mt-4 text-3xl font-medium text-[var(--brand-cream)] sm:text-5xl"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               {SITE.fullName}
             </h2>
-            <p className="mt-4" style={{ color: "var(--cta-desc-text)" }}>
+            <p className="mt-4 text-[var(--brand-muted)]">
               Напишите или позвоните — обсудим сценарий, поэтический проект, клип или продюсирование
               события.
             </p>
@@ -36,22 +29,13 @@ export function ContactSection() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={`mailto:${SITE.email}`}
-                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-medium transition-colors hover:brightness-95"
-                style={{
-                  background: "var(--cta-button-bg)",
-                  color: "var(--cta-button-text)",
-                }}
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--brand-crimson)] px-6 py-3.5 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-[var(--brand-crimson-dark)]"
               >
                 {SITE.email}
               </a>
               <a
                 href={SITE.phoneHref}
-                className="inline-flex items-center justify-center rounded-xl border px-6 py-3.5 text-sm font-medium transition-colors hover:brightness-95"
-                style={{
-                  background: "var(--cta-button-bg)",
-                  color: "var(--cta-button-text)",
-                  borderColor: "var(--secondary-button-border)",
-                }}
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-white/5"
               >
                 {SITE.phone}
               </a>
@@ -59,12 +43,7 @@ export function ContactSection() {
                 href={SITE.social.telegram.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border px-6 py-3.5 text-sm font-medium transition-colors hover:brightness-95"
-                style={{
-                  background: "var(--cta-button-bg)",
-                  color: "var(--cta-button-text)",
-                  borderColor: "var(--secondary-button-border)",
-                }}
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-white/5"
               >
                 Telegram
               </a>
@@ -72,23 +51,16 @@ export function ContactSection() {
                 href={SITE.social.instagram.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border px-6 py-3.5 text-sm font-medium transition-colors hover:brightness-95"
-                style={{
-                  background: "var(--cta-button-bg)",
-                  color: "var(--cta-button-text)",
-                  borderColor: "var(--secondary-button-border)",
-                }}
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 px-6 py-3.5 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-white/5"
               >
                 Instagram
               </a>
             </div>
 
-            <p className="mt-6 text-xs" style={{ color: "var(--cta-desc-text)" }}>
+            <p className="mt-6 text-xs text-[var(--brand-muted)]">
               {SITE.social.telegram.label} · {SITE.social.instagram.label}
             </p>
-            <p className="mt-2 text-sm" style={{ color: "var(--cta-desc-text)" }}>
-              {SITE.location}
-            </p>
+            <p className="mt-2 text-sm text-[var(--brand-muted)]">{SITE.location}</p>
           </div>
         </div>
       </div>
