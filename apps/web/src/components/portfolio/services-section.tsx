@@ -2,32 +2,42 @@ import { SERVICES } from "@/lib/content/portfolio";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section-padding border-t border-white/8">
+    <section
+      id="services"
+      className="section-padding border-t"
+      style={{
+        borderColor: "var(--palette-border)",
+        background: "color-mix(in srgb, var(--color-3) 8%, var(--main-bg))",
+      }}
+    >
       <div className="container-wide">
-        <SectionLabel>Услуги</SectionLabel>
+        <p className="section-label">Услуги</p>
         <h2
-          className="mt-4 max-w-xl text-3xl font-medium text-[var(--brand-cream)] sm:text-4xl"
-          style={{ fontFamily: "var(--font-playfair), serif" }}
+          className="mt-4 max-w-xl text-3xl font-medium sm:text-4xl"
+          style={{ fontFamily: "var(--font-playfair), serif", color: "var(--feature-title-color)" }}
         >
           Чем могу быть полезен
         </h2>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {SERVICES.map((service, index) => (
-            <div
-              key={service.title}
-              className="relative rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] p-8"
-            >
-              <span className="font-mono text-4xl font-light text-[var(--brand-crimson)]/30">
+            <div key={service.title} className="feature-card relative p-8">
+              <span
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full font-mono text-lg font-semibold"
+                style={{
+                  background: "var(--feature-icon-bg)",
+                  color: "var(--palette-label-color)",
+                }}
+              >
                 0{index + 1}
               </span>
               <h3
-                className="mt-4 text-xl font-medium text-[var(--brand-cream)]"
+                className="feature-card-title mt-4 text-xl font-medium"
                 style={{ fontFamily: "var(--font-playfair), serif" }}
               >
                 {service.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--brand-muted)]">
+              <p className="feature-card-desc mt-3 text-sm leading-relaxed">
                 {service.description}
               </p>
             </div>
@@ -35,13 +45,5 @@ export function ServicesSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-sm font-medium uppercase tracking-[0.35em] text-[var(--brand-crimson)]">
-      {children}
-    </p>
   );
 }

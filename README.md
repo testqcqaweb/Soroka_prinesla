@@ -40,7 +40,10 @@ npm start
 | Элемент | Значение |
 |---------|----------|
 | Название | soroka prinesla |
-| Crimson | `#8B1F24` |
-| Фон | `#0C0C0C` |
+| Розовый | `#EE71AD` |
+| Жёлтый | `#FEBB63` |
+| Синий | `#5C79F8` |
+| Маджента | `#E12A74` |
+| Фон | `#FEBB63` |
 
-Логотип: текстовый wordmark в `apps/web/src/components/brand/logo.tsx`
+Палитра задаётся в `apps/web/src/app/globals.css`.
