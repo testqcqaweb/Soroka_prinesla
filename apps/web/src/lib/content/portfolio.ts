@@ -212,5 +212,6 @@ export const NAV = [
   { href: "#about", label: "Обо мне" },
   { href: "#work", label: "Проекты" },
   { href: "#experience", label: "Опыт" },
+  { href: "#services", label: "Услуги" },
   { href: "#contact", label: "Контакт" },
 ] as const;
