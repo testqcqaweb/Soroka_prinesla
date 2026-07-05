@@ -118,7 +118,7 @@ export function DashboardPage() {
               {projects.map((project) => (
                 <Link
                   key={project.id}
-                  href={`/projects/${project.id}/script`}
+                  href={`/projects/${project.id}/overview`}
                   className="group rounded-xl border border-white/8 bg-[var(--santa-charcoal-soft)] p-5 transition-colors hover:border-[var(--santa-crimson)]/40"
                 >
                   <div className="mb-3 flex items-start justify-between gap-3">

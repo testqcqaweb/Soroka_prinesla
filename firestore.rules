@@ -1,20 +1,5 @@
 rules_version = '2';
 
-// ===============================================================
-// Assumed Data Model (Santa Prod. Phase 1)
-// ===============================================================
-//
-// projects/{projectId}
-//   owner_id, title, type, status, logline, script_id, created_at, updated_at
-//
-// scripts/{scriptId}
-//   project_id, title, current_version_id, created_at
-//
-// scripts/{scriptId}/versions/{versionId}
-//   script_id, version_number, label, note, created_at, created_by, blocks[]
-//
-// blocks item: { id, sort_order, type, content, scene_number }
-
 service cloud.firestore {
   match /databases/{database}/documents {
     function isSignedIn() {
@@ -23,6 +8,14 @@ service cloud.firestore {
 
     function isOwner(ownerId) {
       return isSignedIn() && request.auth.uid == ownerId;
+    }
+
+    function projectOwner(projectId) {
+      return get(/databases/$(database)/documents/projects/$(projectId)).data.owner_id;
+    }
+
+    function ownsProject(projectId) {
+      return isOwner(projectOwner(projectId));
     }
 
     function isValidProject() {
@@ -35,9 +28,7 @@ service cloud.firestore {
         && data.type in ['feature', 'short', 'series', 'pilot', 'other']
         && data.status in ['development', 'pre_production', 'production', 'archived']
         && data.created_at is timestamp
-        && data.updated_at is timestamp
-        && (!('logline' in data) || data.logline == null || data.logline is string)
-        && (!('script_id' in data) || data.script_id is string);
+        && data.updated_at is timestamp;
     }
 
     function isValidScript() {
@@ -45,8 +36,7 @@ service cloud.firestore {
       return data.keys().hasAll(['project_id', 'title', 'created_at'])
         && data.project_id is string
         && data.title is string
-        && data.created_at is timestamp
-        && (!('current_version_id' in data) || data.current_version_id is string);
+        && data.created_at is timestamp;
     }
 
     function isValidVersion() {
@@ -57,50 +47,93 @@ service cloud.firestore {
         && data.version_number > 0
         && data.created_at is timestamp
         && data.created_by is string
-        && data.blocks is list
-        && (!('label' in data) || data.label == null || data.label is string)
-        && (!('note' in data) || data.note == null || data.note is string);
+        && data.blocks is list;
+    }
+
+    function isValidTask() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['title', 'status', 'priority', 'created_at'])
+        && data.title is string
+        && data.title.size() > 0
+        && data.status in ['todo', 'in_progress', 'done']
+        && data.priority in ['low', 'medium', 'high']
+        && data.created_at is timestamp;
+    }
+
+    function isValidCalendarEvent() {
+      let data = request.resource.data;
+      return data.keys().hasAll(['owner_id', 'title', 'type', 'start_at', 'created_at'])
+        && data.owner_id is string
+        && data.title is string
+        && data.type in ['deadline', 'meeting', 'milestone', 'other']
+        && data.start_at is timestamp
+        && data.created_at is timestamp;
     }
 
     match /projects/{projectId} {
-      allow read: if isOwner(resource.data.owner_id);
+      allow read: if ownsProject(projectId);
       allow create: if isSignedIn()
         && request.resource.data.owner_id == request.auth.uid
         && isValidProject();
-      allow update: if isOwner(resource.data.owner_id)
+      allow update: if ownsProject(projectId)
         && request.resource.data.owner_id == resource.data.owner_id
         && isValidProject();
-      allow delete: if isOwner(resource.data.owner_id);
+      allow delete: if ownsProject(projectId);
+
+      match /tasks/{taskId} {
+        allow read, write: if ownsProject(projectId);
+        allow create: if ownsProject(projectId) && isValidTask();
+        allow update: if ownsProject(projectId) && isValidTask();
+      }
+
+      match /characters/{characterId} {
+        allow read, write: if ownsProject(projectId);
+      }
+
+      match /beats/{beatId} {
+        allow read, write: if ownsProject(projectId);
+      }
+
+      match /development/{docId} {
+        allow read, write: if ownsProject(projectId);
+      }
     }
 
     match /scripts/{scriptId} {
       allow read: if isSignedIn()
-        && isOwner(get(/databases/$(database)/documents/projects/$(resource.data.project_id)).data.owner_id);
+        && ownsProject(resource.data.project_id);
       allow create: if isSignedIn()
-        && isOwner(get(/databases/$(database)/documents/projects/$(request.resource.data.project_id)).data.owner_id)
+        && ownsProject(request.resource.data.project_id)
         && isValidScript();
       allow update: if isSignedIn()
-        && isOwner(get(/databases/$(database)/documents/projects/$(resource.data.project_id)).data.owner_id)
+        && ownsProject(resource.data.project_id)
         && request.resource.data.project_id == resource.data.project_id
         && isValidScript();
       allow delete: if isSignedIn()
-        && isOwner(get(/databases/$(database)/documents/projects/$(resource.data.project_id)).data.owner_id);
+        && ownsProject(resource.data.project_id);
 
       match /versions/{versionId} {
-        allow read: if isSignedIn()
-          && isOwner(get(/databases/$(database)/documents/projects/$(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)).data.owner_id);
+        allow read, write: if isSignedIn()
+          && ownsProject(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id);
         allow create: if isSignedIn()
-          && isOwner(get(/databases/$(database)/documents/projects/$(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)).data.owner_id)
+          && ownsProject(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)
           && request.resource.data.created_by == request.auth.uid
           && isValidVersion();
         allow update: if isSignedIn()
-          && isOwner(get(/databases/$(database)/documents/projects/$(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)).data.owner_id)
-          && request.resource.data.script_id == resource.data.script_id
-          && request.resource.data.created_by == resource.data.created_by
+          && ownsProject(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)
           && isValidVersion();
-        allow delete: if isSignedIn()
-          && isOwner(get(/databases/$(database)/documents/projects/$(get(/databases/$(database)/documents/scripts/$(scriptId)).data.project_id)).data.owner_id);
       }
+    }
+
+    match /calendar_events/{eventId} {
+      allow read: if isOwner(resource.data.owner_id);
+      allow create: if isSignedIn()
+        && request.resource.data.owner_id == request.auth.uid
+        && isValidCalendarEvent();
+      allow update: if isOwner(resource.data.owner_id)
+        && request.resource.data.owner_id == resource.data.owner_id
+        && isValidCalendarEvent();
+      allow delete: if isOwner(resource.data.owner_id);
     }
   }
 }

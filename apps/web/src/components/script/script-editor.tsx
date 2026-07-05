@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
-import Link from "next/link";
 import { useAuth } from "@/components/auth/auth-provider";
+import { ProjectNav } from "@/components/project/project-nav";
 import { SceneNav } from "@/components/script/scene-nav";
 import {
   insertBlockAfter,
@@ -216,14 +216,11 @@ export function ScriptEditor({ data, onReload }: ScriptEditorProps) {
 
   return (
     <div className="flex h-[calc(100vh-3.5rem)] flex-col">
+      <div className="border-b border-white/8 px-4 py-3">
+        <ProjectNav projectId={data.project.id} projectTitle={data.project.title} />
+      </div>
       <header className="flex items-center justify-between gap-4 border-b border-white/8 px-4 py-3">
         <div className="min-w-0">
-          <Link
-            href="/"
-            className="text-xs text-[var(--santa-muted)] transition-colors hover:text-[var(--santa-cream)]"
-          >
-            ← {data.project.title}
-          </Link>
           <h1 className="truncate text-lg font-medium">Сценарий</h1>
         </div>
 

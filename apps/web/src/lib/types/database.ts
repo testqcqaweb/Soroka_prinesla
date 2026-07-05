@@ -12,6 +12,11 @@ export type ScriptBlockType =
   | "dialogue"
   | "parenthetical";
 
+export type TaskStatus = "todo" | "in_progress" | "done";
+export type TaskPriority = "low" | "medium" | "high";
+export type CalendarEventType = "deadline" | "meeting" | "milestone" | "other";
+export type BeatAct = 1 | 2 | 3 | "other";
+
 export type Project = {
   id: string;
   owner_id: string;
@@ -62,4 +67,64 @@ export type ScriptEditorData = {
   version: ScriptVersion;
   blocks: ScriptBlock[];
   versions: Pick<ScriptVersion, "id" | "version_number" | "label" | "created_at">[];
+};
+
+export type Task = {
+  id: string;
+  project_id: string;
+  title: string;
+  description: string | null;
+  status: TaskStatus;
+  priority: TaskPriority;
+  due_date: string | null;
+  created_at: string;
+  completed_at: string | null;
+};
+
+export type Character = {
+  id: string;
+  project_id: string;
+  name: string;
+  age: string | null;
+  description: string | null;
+  arc: string | null;
+  notes: string | null;
+  order: number;
+};
+
+export type Beat = {
+  id: string;
+  project_id: string;
+  act: BeatAct;
+  order: number;
+  title: string;
+  description: string | null;
+};
+
+export type Synopsis = {
+  project_id: string;
+  short_logline: string | null;
+  extended_synopsis: string | null;
+  treatment: string | null;
+  updated_at: string;
+};
+
+export type CalendarEvent = {
+  id: string;
+  owner_id: string;
+  project_id: string | null;
+  project_title?: string | null;
+  title: string;
+  type: CalendarEventType;
+  start_at: string;
+  end_at: string | null;
+};
+
+export type ProjectOverview = {
+  project: ProjectWithScript;
+  openTasks: number;
+  doneTasks: number;
+  characters: number;
+  beats: number;
+  upcomingEvents: CalendarEvent[];
 };

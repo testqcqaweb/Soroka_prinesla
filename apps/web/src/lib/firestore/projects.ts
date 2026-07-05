@@ -100,6 +100,22 @@ function mapBlocks(raw: unknown[], versionId: string): ScriptBlock[] {
   });
 }
 
+export async function fetchProject(
+  projectId: string,
+  ownerId: string,
+): Promise<ProjectWithScript | null> {
+  const snap = await getDoc(doc(db(), "projects", projectId));
+  if (!snap.exists()) return null;
+  const data = snap.data();
+  if (data.owner_id !== ownerId) return null;
+  return {
+    ...mapProject(snap.id, data),
+    script_id: String(data.script_id ?? ""),
+    current_version_id: (data.current_version_id as string | null) ?? null,
+    version_number: (data.version_number as number | null) ?? null,
+  };
+}
+
 export async function fetchProjects(ownerId: string): Promise<ProjectWithScript[]> {
   const projectsQuery = query(
     collection(db(), "projects"),

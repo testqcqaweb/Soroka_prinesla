@@ -43,7 +43,7 @@ export function NewProjectPage() {
 
     try {
       const { projectId } = await createProjectRecord(user.uid, { title, logline, type });
-      router.push(`/projects/${projectId}/script`);
+      router.push(`/projects/${projectId}/overview`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Не удалось создать проект");
       setLoading(false);
