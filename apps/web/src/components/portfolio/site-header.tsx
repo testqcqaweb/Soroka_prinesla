@@ -19,7 +19,7 @@ export function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/8 bg-[var(--santa-charcoal)]/90 backdrop-blur-xl"
+          ? "border-b border-white/8 bg-[var(--brand-charcoal)]/90 backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
@@ -31,7 +31,7 @@ export function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              className="rounded-lg px-3 py-1.5 text-sm text-[var(--santa-cream)]/70 transition-colors hover:bg-white/5 hover:text-[var(--santa-cream)]"
+              className="rounded-lg px-3 py-1.5 text-sm text-[var(--brand-cream)]/70 transition-colors hover:bg-white/5 hover:text-[var(--brand-cream)]"
             >
               {item.label}
             </a>
@@ -40,7 +40,7 @@ export function SiteHeader() {
 
         <a
           href="#contact"
-          className="hidden rounded-lg bg-[var(--santa-crimson)] px-4 py-2 text-sm font-medium text-[var(--santa-cream)] transition-colors hover:bg-[var(--santa-crimson-dark)] md:inline-flex"
+          className="hidden rounded-lg bg-[var(--brand-crimson)] px-4 py-2 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-[var(--brand-crimson-dark)] md:inline-flex"
         >
           Связаться
         </a>
@@ -56,13 +56,13 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-white/8 bg-[var(--santa-charcoal)] px-4 py-4 md:hidden">
+        <nav className="border-t border-white/8 bg-[var(--brand-charcoal)] px-4 py-4 md:hidden">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="block rounded-lg px-3 py-2 text-sm text-[var(--santa-cream)]/80 hover:bg-white/5"
+              className="block rounded-lg px-3 py-2 text-sm text-[var(--brand-cream)]/80 hover:bg-white/5"
             >
               {item.label}
             </a>
@@ -70,7 +70,7 @@ export function SiteHeader() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 block rounded-lg bg-[var(--santa-crimson)] px-3 py-2 text-center text-sm font-medium text-[var(--santa-cream)]"
+            className="mt-2 block rounded-lg bg-[var(--brand-crimson)] px-3 py-2 text-center text-sm font-medium text-[var(--brand-cream)]"
           >
             Связаться
           </a>

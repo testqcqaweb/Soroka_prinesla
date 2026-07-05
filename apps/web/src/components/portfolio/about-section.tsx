@@ -7,7 +7,7 @@ export function AboutSection() {
         <SectionLabel>Обо мне</SectionLabel>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-5 text-lg leading-relaxed text-[var(--santa-cream)]/85">
+          <div className="space-y-5 text-lg leading-relaxed text-[var(--brand-cream)]/85">
             {ABOUT.bio.map((paragraph) => (
               <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
@@ -17,29 +17,29 @@ export function AboutSection() {
             {ABOUT.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/8 bg-[var(--santa-charcoal-soft)] p-5"
+                className="rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] p-5"
               >
                 <p
-                  className="text-3xl font-medium text-[var(--santa-cream)]"
+                  className="text-3xl font-medium text-[var(--brand-cream)]"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
                   {stat.value}
                 </p>
-                <p className="mt-1 text-xs text-[var(--santa-muted)]">{stat.label}</p>
+                <p className="mt-1 text-xs text-[var(--brand-muted)]">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="mt-12">
-          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--santa-muted)]">
+          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--brand-muted)]">
             Ключевые компетенции
           </h3>
           <div className="flex flex-wrap gap-2">
             {ABOUT.competencies.map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-white/10 bg-[var(--santa-ink)] px-4 py-1.5 text-sm text-[var(--santa-muted)]"
+                className="rounded-full border border-white/10 bg-[var(--brand-ink)] px-4 py-1.5 text-sm text-[var(--brand-muted)]"
               >
                 {skill}
               </span>
@@ -48,23 +48,23 @@ export function AboutSection() {
         </div>
 
         <div className="mt-10">
-          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--santa-muted)]">
+          <h3 className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--brand-muted)]">
             Языки
           </h3>
           <div className="flex flex-wrap gap-3">
             {ABOUT.languages.map(({ lang, level }) => (
               <span
                 key={lang}
-                className="text-sm text-[var(--santa-cream)]/80"
+                className="text-sm text-[var(--brand-cream)]/80"
               >
                 {lang}
                 {level && (
-                  <span className="ml-1 text-[var(--santa-muted)]">({level})</span>
+                  <span className="ml-1 text-[var(--brand-muted)]">({level})</span>
                 )}
               </span>
             ))}
           </div>
-          <p className="mt-4 text-xs text-[var(--santa-muted)]">{ABOUT.extra}</p>
+          <p className="mt-4 text-xs text-[var(--brand-muted)]">{ABOUT.extra}</p>
         </div>
       </div>
     </section>
@@ -73,7 +73,7 @@ export function AboutSection() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-sm font-medium uppercase tracking-[0.35em] text-[var(--santa-crimson)]">
+    <p className="text-sm font-medium uppercase tracking-[0.35em] text-[var(--brand-crimson)]">
       {children}
     </p>
   );

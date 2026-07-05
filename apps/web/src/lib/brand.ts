@@ -1,6 +1,6 @@
 export const BRAND = {
-  name: "Santa Prod.",
-  shortName: "Santa Prod",
+  name: "soroka prinesla",
+  shortName: "soroka prinesla",
   tagline: "Сценарист · Продюсер",
   description:
     "Портфолио Кирилла Сорокина — сценарист, продюсер, автор поэтических проектов и VHS-клипов.",

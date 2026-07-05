@@ -1,4 +1,4 @@
-# Santa Prod. — Портфолио
+# soroka prinesla — Портфолио
 
 Личный сайт продюсера и сценариста. Публичный, без авторизации.
 
@@ -39,8 +39,8 @@ npm start
 
 | Элемент | Значение |
 |---------|----------|
-| Название | Santa Prod. |
+| Название | soroka prinesla |
 | Crimson | `#8B1F24` |
 | Фон | `#0C0C0C` |
 
-Логотип: `apps/web/public/santa-prod-logo.png`
+Логотип: текстовый wordmark в `apps/web/src/components/brand/logo.tsx`

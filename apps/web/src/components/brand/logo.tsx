@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 
@@ -10,12 +9,12 @@ type LogoProps = {
 };
 
 const sizes = {
-  sm: { mark: 28, wordmark: { w: 100, h: 20 } },
-  md: { mark: 36, wordmark: { w: 128, h: 26 } },
-  lg: { mark: 48, wordmark: { w: 160, h: 32 } },
+  sm: { mark: 28 },
+  md: { mark: 36 },
+  lg: { mark: 48 },
 } as const;
 
-export function SantaProdMark({
+export function SorokaPrineslaMark({
   size = "md",
   className = "",
 }: {
@@ -34,17 +33,33 @@ export function SantaProdMark({
       aria-hidden
       className={className}
     >
+      <circle cx="24" cy="24" r="22" fill="var(--brand-crimson)" opacity="0.15" />
       <path
-        d="M8 14C8 10.5 11 8 15 8H28C34 8 38 12 38 17C38 22 34 25 29 26L38 40H28L21 28H18V40H8V14Z"
-        fill="var(--santa-crimson)"
+        d="M10 28C10 20 16 14 24 14C30 14 35 18 36 24C32 22 28 21 24 21C18 21 13 24 10 28Z"
+        fill="var(--brand-charcoal)"
       />
       <path
-        d="M18 14V22H24C26.5 22 28 20.5 28 18C28 15.5 26.5 14 24 14H18Z"
-        fill="var(--santa-cream)"
+        d="M24 14C30 14 35 18 36 24C34 20 30 17 24 17C20 17 16 19 14 22C16 17 20 14 24 14Z"
+        fill="var(--brand-cream)"
       />
-      <path d="M6 6H16L10 12L6 6Z" fill="var(--santa-cream)" opacity="0.9" />
-      <rect x="6" y="4" width="12" height="3" rx="0.5" fill="var(--santa-cream)" />
+      <path
+        d="M36 24C38 26 39 29 38 32C35 30 32 28 28 27C32 26 35 25 36 24Z"
+        fill="var(--brand-crimson)"
+      />
+      <circle cx="20" cy="22" r="1.5" fill="var(--brand-cream)" />
     </svg>
+  );
+}
+
+function Wordmark({ size = "md", className = "" }: { size?: LogoProps["size"]; className?: string }) {
+  const textSize =
+    size === "lg" ? "text-xl" : size === "sm" ? "text-sm" : "text-base";
+
+  return (
+    <span className={`font-semibold tracking-tight lowercase ${textSize} ${className}`}>
+      <span className="text-[var(--brand-crimson)]">soroka</span>{" "}
+      <span className="text-[var(--brand-cream)]">prinesla</span>
+    </span>
   );
 }
 
@@ -56,25 +71,13 @@ export function Logo({
 }: LogoProps) {
   const content =
     variant === "mark" ? (
-      <SantaProdMark size={size} />
+      <SorokaPrineslaMark size={size} />
     ) : variant === "wordmark" ? (
-      <span
-        className={`font-semibold tracking-tight ${className}`}
-        style={{ fontSize: size === "lg" ? "1.25rem" : size === "sm" ? "0.875rem" : "1rem" }}
-      >
-        <span className="text-[var(--santa-crimson)]">Santa</span>{" "}
-        <span className="text-[var(--santa-cream)]">Prod.</span>
-      </span>
+      <Wordmark size={size} className={className} />
     ) : (
-      <div className={`flex items-center gap-3 ${className}`}>
-        <Image
-          src="/santa-prod-logo.png"
-          alt={BRAND.name}
-          width={size === "lg" ? 160 : size === "sm" ? 100 : 128}
-          height={size === "lg" ? 48 : size === "sm" ? 30 : 38}
-          className="h-auto w-auto"
-          priority
-        />
+      <div className={`flex items-center gap-2.5 ${className}`}>
+        <SorokaPrineslaMark size={size} />
+        <Wordmark size={size} />
       </div>
     );
 

@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --santa-crimson: #8b1f24;
-  --santa-crimson-dark: #6b1519;
-  --santa-cream: #f4f0e8;
-  --santa-cream-muted: #e8e2d6;
-  --santa-charcoal: #0c0c0c;
-  --santa-charcoal-soft: #161616;
-  --santa-ink: #1f1f1f;
-  --santa-muted: #8a8580;
+  --brand-crimson: #8b1f24;
+  --brand-crimson-dark: #6b1519;
+  --brand-cream: #f4f0e8;
+  --brand-cream-muted: #e8e2d6;
+  --brand-charcoal: #0c0c0c;
+  --brand-charcoal-soft: #161616;
+  --brand-ink: #1f1f1f;
+  --brand-muted: #8a8580;
 
-  --background: var(--santa-charcoal);
-  --foreground: var(--santa-cream);
+  --background: var(--brand-charcoal);
+  --foreground: var(--brand-cream);
 }
 
 @theme inline {
@@ -33,7 +33,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--santa-crimson) 45%, transparent);
+  background: color-mix(in srgb, var(--brand-crimson) 45%, transparent);
 }
 
 @keyframes fade-up {
@@ -71,9 +71,9 @@ body {
 .text-gradient {
   background: linear-gradient(
     135deg,
-    var(--santa-cream) 0%,
-    var(--santa-cream-muted) 40%,
-    color-mix(in srgb, var(--santa-crimson) 60%, var(--santa-cream)) 100%
+    var(--brand-cream) 0%,
+    var(--brand-cream-muted) 40%,
+    color-mix(in srgb, var(--brand-crimson) 60%, var(--brand-cream)) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
