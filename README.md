@@ -16,6 +16,15 @@ npm run dev
 
 Откройте [http://localhost:3000](http://localhost:3000).
 
+## Тесты
+
+```bash
+cd apps/web
+npm test
+```
+
+Перед деплоем: `npm run lint && npm test && npm run build:pages`
+
 ## Редактирование контента
 
 Весь текст сайта — в одном файле:
