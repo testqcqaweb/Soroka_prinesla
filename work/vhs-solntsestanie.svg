@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0C0C0C"/>
+  <defs>
+    <radialGradient id="sun" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#8B1F24" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#6B1519" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#sun)"/>
+  <circle cx="400" cy="140" r="55" fill="#F4F0E8" opacity="0.15"/>
+  <circle cx="400" cy="140" r="35" fill="#8B1F24" opacity="0.5"/>
+  <rect x="250" y="220" width="300" height="180" rx="8" fill="#1F1F1F" stroke="#8A8580" stroke-width="2"/>
+  <rect x="270" y="240" width="260" height="140" fill="#0C0C0C"/>
+  <text x="400" y="310" text-anchor="middle" fill="#8B1F24" font-family="monospace" font-size="28" letter-spacing="4">PLAY ¶</text>
+  <text x="400" y="350" text-anchor="middle" fill="#F4F0E8" font-family="sans-serif" font-size="14" opacity="0.5">SP " SOLNCESTOYANIE</text>
+  <rect x="230" y="210" width="24" height="200" rx="4" fill="#161616"/>
+  <rect x="546" y="210" width="24" height="200" rx="4" fill="#161616"/>
+  <path d="M120 400 H680" stroke="#8B1F24" stroke-width="1" opacity="0.3"/>
+  <text x="400" y="430" text-anchor="middle" fill="#8A8580" font-family="monospace" font-size="12">REC Ï 00:04:12</text>
+</svg>

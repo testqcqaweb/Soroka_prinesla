@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0C0C0C"/>
+  <defs>
+    <linearGradient id="cafe" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8B1F24" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#cafe)"/>
+  <rect x="100" y="280" width="600" height="160" fill="#161616"/>
+  <rect x="120" y="120" width="200" height="160" fill="#1F1F1F" stroke="#8A8580" stroke-width="1"/>
+  <circle cx="220" cy="200" r="40" stroke="#8B1F24" stroke-width="2" fill="none" opacity="0.6"/>
+  <rect x="360" y="160" width="320" height="120" rx="6" fill="#1F1F1F" stroke="#8B1F24" stroke-width="1" opacity="0.7"/>
+  <text x="520" y="210" text-anchor="middle" fill="#F4F0E8" font-family="serif" font-size="32">C;L20@</text>
+  <text x="520" y="245" text-anchor="middle" fill="#8A8580" font-family="sans-serif" font-size="14">VHS SESSION</text>
+  <rect x="280" y="300" width="240" height="100" rx="6" fill="#0C0C0C" stroke="#8A8580" stroke-width="1"/>
+  <text x="400" y="360" text-anchor="middle" fill="#8B1F24" font-family="monospace" font-size="22">¶ REC</text>
+  <ellipse cx="180" cy="340" rx="35" ry="18" fill="#1F1F1F"/>
+  <ellipse cx="620" cy="340" rx="35" ry="18" fill="#1F1F1F"/>
+</svg>

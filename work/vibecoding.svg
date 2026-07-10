@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0C0C0C"/>
+  <rect width="800" height="500" fill="url(#grain)" opacity="0.15"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#8B1F24" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#8B1F24" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.6" fill="#F4F0E8" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#glow)"/>
+  <text x="120" y="180" fill="#8B1F24" font-family="monospace" font-size="22" opacity="0.9">const verse = {</text>
+  <text x="150" y="220" fill="#F4F0E8" font-family="monospace" font-size="20" opacity="0.85">  mood: "vhs",</text>
+  <text x="150" y="260" fill="#F4F0E8" font-family="monospace" font-size="20" opacity="0.85">  rhythm: true,</text>
+  <text x="150" y="300" fill="#E8E2D6" font-family="serif" font-size="24" font-style="italic" opacity="0.7">  «AB@>:0 2 :>45»</text>
+  <text x="120" y="340" fill="#8B1F24" font-family="monospace" font-size="22" opacity="0.9">};</text>
+  <path d="M520 120 L680 120 L680 380 L520 380 Z" stroke="#8B1F24" stroke-width="2" opacity="0.5"/>
+  <path d="M540 160 H660 M540 210 H620 M540 260 H640 M540 310 H580" stroke="#F4F0E8" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+  <circle cx="600" cy="350" r="28" fill="#8B1F24" opacity="0.35"/>
+  <path d="M590 350 L598 358 L615 338" stroke="#F4F0E8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
