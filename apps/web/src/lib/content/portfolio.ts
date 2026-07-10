@@ -104,7 +104,7 @@ export const WORK: WorkItem[] = [
     description:
       "Авторский проект на стыке поэзии и кода. Эксперимент с формой, где текст и технология усиливают друг друга.",
     tags: ["поэзия", "код", "авторское"],
-    image: "/work/vibecoding.svg",
+    image: "/work/vibecoding.png",
     links: [
       { label: "Репозиторий на GitHub", href: GITHUB_REPO },
       { label: "Instagram", href: INSTAGRAM },

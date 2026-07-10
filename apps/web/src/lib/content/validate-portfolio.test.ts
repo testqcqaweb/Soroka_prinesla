@@ -23,7 +23,7 @@ describe("portfolio content", () => {
 
   it("provides illustrations and links for every project", () => {
     for (const item of WORK) {
-      expect(item.image).toMatch(/^\/work\/.+\.svg$/);
+      expect(item.image).toMatch(/^\/work\/.+\.(svg|png|jpe?g|webp)$/);
       expect(item.links.length).toBeGreaterThan(0);
       expect(item.links.every((link) => link.href.startsWith("https://") || link.href.startsWith("/books/"))).toBe(true);
     }
