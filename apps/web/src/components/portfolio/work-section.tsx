@@ -1,0 +1,149 @@
+import Image from "next/image";
+import { assetPath, resolveLinkHref } from "@/lib/asset-path";
+import { WORK, type WorkItem } from "@/lib/content/portfolio";
+
+export function WorkSection() {
+  const featured = WORK.filter((w) => w.featured);
+  const rest = WORK.filter((w) => !w.featured);
+
+  return (
+    <section id="work" className="section-padding border-t border-white/8 bg-[var(--brand-charcoal-soft)]/50">
+      <div className="container-wide">
+        <SectionLabel>Творческие проекты</SectionLabel>
+        <h2
+          className="mt-4 max-w-2xl text-3xl font-medium leading-tight text-[var(--brand-cream)] sm:text-4xl"
+          style={{ fontFamily: "var(--font-playfair), serif" }}
+        >
+          Избранные творческие проекты
+        </h2>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {featured.map((item) => (
+            <article
+              key={item.slug}
+              className="group relative overflow-hidden rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] transition-all hover:border-[var(--brand-crimson)]/40 hover:shadow-2xl hover:shadow-black/40"
+            >
+              <WorkIllustration item={item} variant="featured" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-crimson)]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="relative p-8">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-[var(--brand-crimson)]">
+                      {item.type}
+                      {item.year ? ` · ${item.year}` : ""}
+                    </p>
+                    <h3
+                      className="mt-2 text-2xl font-medium text-[var(--brand-cream)]"
+                      style={{ fontFamily: "var(--font-playfair), serif" }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--brand-muted)]">
+                    {item.role}
+                  </span>
+                </div>
+                <p className="mt-4 leading-relaxed text-[var(--brand-muted)]">{item.description}</p>
+                <ProjectLinks item={item} />
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md bg-white/5 px-2.5 py-0.5 text-xs text-[var(--brand-muted)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {rest.length > 0 && (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {rest.map((item) => (
+              <article
+                key={item.slug}
+                className="group overflow-hidden rounded-xl border border-white/8 bg-[var(--brand-charcoal)] transition-colors hover:border-white/15"
+              >
+                <WorkIllustration item={item} variant="compact" />
+                <div className="p-6">
+                  <p className="text-xs text-[var(--brand-crimson)]">
+                    {item.type}
+                    {item.year ? ` · ${item.year}` : ""}
+                  </p>
+                  <h3 className="mt-1 font-medium text-[var(--brand-cream)]">{item.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-[var(--brand-muted)]">{item.description}</p>
+                  <ProjectLinks item={item} compact />
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function WorkIllustration({
+  item,
+  variant,
+}: {
+  item: WorkItem;
+  variant: "featured" | "compact";
+}) {
+  const isFeatured = variant === "featured";
+
+  return (
+    <div
+      className={`relative overflow-hidden bg-[var(--brand-ink)] ${
+        isFeatured ? "aspect-[16/10] w-full" : "aspect-[2/1] w-full"
+      }`}
+    >
+      <Image
+        src={assetPath(item.image)}
+        alt={`Иллюстрация проекта «${item.title}»`}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        sizes={isFeatured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
+        unoptimized
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--brand-charcoal-soft)] via-transparent to-transparent opacity-80" />
+    </div>
+  );
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-sm font-medium uppercase tracking-[0.35em] text-[var(--brand-crimson)]">
+      {children}
+    </p>
+  );
+}
+
+function ProjectLinks({ item, compact }: { item: WorkItem; compact?: boolean }) {
+  if (item.links.length === 0) {
+    return null;
+  }
+
+  return (
+    <ul className={`flex flex-wrap gap-x-4 gap-y-2 ${compact ? "mt-3" : "mt-4"}`}>
+      {item.links.map((link) => (
+        <li key={`${item.slug}-${link.href}`}>
+          <a
+            href={resolveLinkHref(link.href)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1 text-[var(--brand-crimson)] transition-colors hover:text-[var(--brand-cream)] hover:underline ${
+              compact ? "text-xs" : "text-sm"
+            }`}
+          >
+            {link.label}
+            <span aria-hidden>→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}

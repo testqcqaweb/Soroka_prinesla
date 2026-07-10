@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0C0C0C"/>
+  <defs>
+    <radialGradient id="stage" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#8B1F24" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0C0C0C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#stage)"/>
+  <path d="M120 380 H680" stroke="#8A8580" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="400" cy="380" rx="280" ry="30" fill="#161616" opacity="0.8"/>
+  <rect x="160" y="120" width="40" height="260" fill="#1F1F1F"/>
+  <rect x="600" y="120" width="40" height="260" fill="#1F1F1F"/>
+  <path d="M180 120 Q400 60 620 120" stroke="#8B1F24" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M180 160 Q400 100 620 160" stroke="#F4F0E8" stroke-width="1" fill="none" opacity="0.15"/>
+  <circle cx="400" cy="300" r="8" fill="#F4F0E8" opacity="0.9"/>
+  <rect x="385" y="308" width="30" height="72" rx="4" fill="#1F1F1F"/>
+  <path d="M340 200 Q400 160 460 200" stroke="#8B1F24" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <text x="400" y="100" text-anchor="middle" fill="#F4F0E8" font-family="serif" font-size="24" opacity="0.55">$8;0@<>=8O</text>
+</svg>
