@@ -25,6 +25,7 @@ describe("WorkSection", () => {
     expect(screen.getByRole("heading", { name: /Избранные творческие проекты/i })).toBeInTheDocument();
     expect(screen.getByText("Вайбкодинг")).toBeInTheDocument();
     expect(screen.getByText("Стихи на советской")).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /Следующее фото/i }).length).toBeGreaterThan(0);
     expect(screen.getByRole("img", { name: /Иллюстрация проекта «Вайбкодинг»/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Репозиторий на GitHub/i })).toHaveAttribute(
       "href",
@@ -35,6 +36,7 @@ describe("WorkSection", () => {
       "href",
       "/books/stih-yest.pdf",
     );
+    expect(screen.getByRole("link", { name: /Смотреть клип/i })).toHaveAttribute("href", "/video/bulvar.mp4");
   });
 });
 

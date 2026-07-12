@@ -86,6 +86,8 @@ export type WorkItem = {
   description: string;
   tags: string[];
   image: string;
+  gallery?: string[];
+  video?: string;
   links: WorkLink[];
   featured?: boolean;
 };
@@ -93,6 +95,11 @@ export type WorkItem = {
 const INSTAGRAM = SITE.social.instagram.href;
 const TELEGRAM = SITE.social.telegram.href;
 const GITHUB_REPO = "https://github.com/testqcqaweb/Soroka_prinesla";
+
+const POETIC_EVENING_GALLERY = [
+  "/work/poetic-studio.png",
+  "/work/poetic-forest.png",
+] as const;
 
 export const WORK: WorkItem[] = [
   {
@@ -119,7 +126,8 @@ export const WORK: WorkItem[] = [
     role: "Автор · Продюсер",
     description: "Серия поэтических вечеров в Бресте — камерная атмосфера, живая поэзия, собственная концепция.",
     tags: ["поэзия", "ивент", "Брест"],
-    image: "/work/stihi-na-sovetskoy.svg",
+    image: POETIC_EVENING_GALLERY[0],
+    gallery: [...POETIC_EVENING_GALLERY],
     links: [
       { label: "Фото и анонсы в Instagram", href: INSTAGRAM },
       { label: "Telegram", href: TELEGRAM },
@@ -134,7 +142,8 @@ export const WORK: WorkItem[] = [
     role: "Автор · Организатор",
     description: "Камерные чтения — интимный формат встречи автора и слушателя.",
     tags: ["поэзия", "камерный формат"],
-    image: "/work/vochy-u-vochy.svg",
+    image: POETIC_EVENING_GALLERY[0],
+    gallery: [...POETIC_EVENING_GALLERY],
     links: [{ label: "Анонсы в Instagram", href: INSTAGRAM }],
   },
   {
@@ -146,7 +155,7 @@ export const WORK: WorkItem[] = [
     description:
       "Авторский текст, концепция и издание поэтического сборника. Можно открыть и прочитать онлайн.",
     tags: ["книга", "поэзия", "издание"],
-    image: "/work/stih-yest.svg",
+    image: "/work/stih-yest.png",
     links: [
       { label: "Открыть сборник (PDF)", href: "/books/stih-yest.pdf" },
       { label: "Подробности в Telegram", href: TELEGRAM },
@@ -176,7 +185,11 @@ export const WORK: WorkItem[] = [
     description: "Режиссура клипов на VHS для кафе «Бульвар» — авторский визуальный язык и монтаж.",
     tags: ["VHS", "клип", "Брест"],
     image: "/work/vhs-bulvar.svg",
-    links: [{ label: "Клипы в Instagram", href: INSTAGRAM }],
+    video: "/video/bulvar.mp4",
+    links: [
+      { label: "Смотреть клип", href: "/video/bulvar.mp4" },
+      { label: "Instagram", href: INSTAGRAM },
+    ],
   },
   {
     slug: "filarmonia",
@@ -186,7 +199,7 @@ export const WORK: WorkItem[] = [
     role: "Участник",
     description: "Участник выступлений в Брестской филармонии.",
     tags: ["поэзия", "сцена", "филармония"],
-    image: "/work/filarmonia.svg",
+    image: "/work/filarmonia.png",
     links: [{ label: "Выступления в Instagram", href: INSTAGRAM }],
   },
 ];
@@ -196,6 +209,7 @@ export type ExperienceItem = {
   place: string;
   period: string;
   points: string[];
+  image?: string;
 };
 
 export const EXPERIENCE: ExperienceItem[] = [
@@ -225,6 +239,16 @@ export const EXPERIENCE: ExperienceItem[] = [
     points: [
       "Координация работы зала и кухни",
       "Решение конфликтов, контроль качества",
+    ],
+  },
+  {
+    title: "Работа в ресторане",
+    place: "Café Louvre, Praha",
+    period: "2012–2017",
+    image: "/experience/louvre-praha.png",
+    points: [
+      "Команда кухни в легендарном пражском кафе",
+      "Стандарты сервиса, дисциплина, работа в мультикультурной среде",
     ],
   },
   {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { WorkGalleryCarousel } from "@/components/portfolio/work-gallery-carousel";
 import { assetPath, resolveLinkHref } from "@/lib/asset-path";
 import { WORK, type WorkItem } from "@/lib/content/portfolio";
 
@@ -95,20 +96,38 @@ function WorkIllustration({
 }) {
   const isFeatured = variant === "featured";
 
+  if (item.gallery && item.gallery.length > 0 && !item.video) {
+    return <WorkGalleryCarousel images={item.gallery} title={item.title} variant={variant} />;
+  }
+
   return (
     <div
       className={`relative overflow-hidden bg-[var(--brand-ink)] ${
         isFeatured ? "aspect-[16/10] w-full" : "aspect-[2/1] w-full"
       }`}
     >
-      <Image
-        src={assetPath(item.image)}
-        alt={`Иллюстрация проекта «${item.title}»`}
-        fill
-        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-        sizes={isFeatured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
-        unoptimized
-      />
+      {item.video ? (
+        <video
+          src={assetPath(item.video)}
+          poster={assetPath(item.image)}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          aria-label={`Видео проекта «${item.title}»`}
+        />
+      ) : (
+        <Image
+          src={assetPath(item.image)}
+          alt={`Иллюстрация проекта «${item.title}»`}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          sizes={isFeatured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
+          unoptimized
+        />
+      )}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--brand-charcoal-soft)] via-transparent to-transparent opacity-80" />
     </div>
   );

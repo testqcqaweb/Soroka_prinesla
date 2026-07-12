@@ -14,6 +14,7 @@ export const SECTION_IDS = ["about", "work", "experience", "services", "contact"
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const URL_RE = /^https:\/\/.+/;
 const LOCAL_BOOK_RE = /^\/books\/.+\.pdf$/;
+const LOCAL_VIDEO_RE = /^\/video\/.+\.(mp4|webm)$/;
 
 export type PortfolioValidationIssue = {
   field: string;
@@ -143,6 +144,24 @@ function validateWorkItem(item: WorkItem): PortfolioValidationIssue[] {
     });
   }
 
+  if (item.gallery) {
+    for (const [index, image] of item.gallery.entries()) {
+      if (!image.startsWith("/work/")) {
+        issues.push({
+          field: `WORK.${item.slug}.gallery[${index}]`,
+          message: "gallery должен указывать на файл в /work/",
+        });
+      }
+    }
+  }
+
+  if (item.video && !LOCAL_VIDEO_RE.test(item.video)) {
+    issues.push({
+      field: `WORK.${item.slug}.video`,
+      message: "video должен указывать на файл в /video/ (.mp4 или .webm)",
+    });
+  }
+
   if (item.links.length === 0) {
     issues.push({
       field: `WORK.${item.slug}.links`,
@@ -158,10 +177,10 @@ function validateWorkItem(item: WorkItem): PortfolioValidationIssue[] {
       });
     }
 
-    if (!URL_RE.test(link.href) && !LOCAL_BOOK_RE.test(link.href)) {
+    if (!URL_RE.test(link.href) && !LOCAL_BOOK_RE.test(link.href) && !LOCAL_VIDEO_RE.test(link.href)) {
       issues.push({
         field: `WORK.${item.slug}.links[${index}].href`,
-        message: "Ссылка должна быть https или путь к PDF в /books/",
+        message: "Ссылка должна быть https, PDF в /books/ или видео в /video/",
       });
     }
   }

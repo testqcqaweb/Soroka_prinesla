@@ -25,7 +25,7 @@ describe("portfolio content", () => {
     for (const item of WORK) {
       expect(item.image).toMatch(/^\/work\/.+\.(svg|png|jpe?g|webp)$/);
       expect(item.links.length).toBeGreaterThan(0);
-      expect(item.links.every((link) => link.href.startsWith("https://") || link.href.startsWith("/books/"))).toBe(true);
+      expect(item.links.every((link) => link.href.startsWith("https://") || link.href.startsWith("/books/") || link.href.startsWith("/video/"))).toBe(true);
     }
   });
 
