@@ -26,14 +26,21 @@ export function ExperienceSection() {
                     src={assetPath(item.image)}
                     alt={`${item.title} · ${item.place}`}
                     fill
-                    className="object-cover object-center"
+                    className="scale-[1.02] object-cover object-center"
                     sizes="(min-width: 1024px) 1152px, 100vw"
                     unoptimized
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--brand-charcoal-soft)] via-transparent to-transparent opacity-90" />
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[var(--brand-charcoal-soft)] to-transparent sm:h-20"
+                    aria-hidden
+                  />
                 </div>
               )}
-              <div className="p-6 sm:p-8">
+              <div
+                className={`bg-[var(--brand-charcoal-soft)] p-6 sm:p-8 ${
+                  item.image ? "relative z-10 -mt-px pt-5 sm:pt-6" : ""
+                }`}
+              >
                 <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
                   <div>
                     <h3 className="text-lg font-medium text-[var(--brand-cream)]">{item.title}</h3>
