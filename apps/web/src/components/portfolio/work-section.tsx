@@ -88,7 +88,11 @@ export function WorkSection() {
 }
 
 function hasWorkMedia(item: WorkItem): boolean {
-  return Boolean(item.video || (item.gallery && item.gallery.length > 0) || item.image);
+  // Реальные фото/галерея/видео; без медиа — без пустого блока
+  if (item.gallery && item.gallery.length > 0) return true;
+  if (item.video) return true;
+  if (item.image && !item.image.endsWith(".svg")) return true;
+  return false;
 }
 
 function WorkIllustration({

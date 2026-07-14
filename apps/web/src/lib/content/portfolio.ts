@@ -176,7 +176,6 @@ export const WORK: WorkItem[] = [
     role: "Режиссёр",
     description: "Режиссура клипов на VHS для кафе «Бульвар» — авторский визуальный язык и монтаж.",
     tags: ["VHS", "клип", "Брест"],
-    video: "/video/bulvar.mp4",
     links: [
       { label: "Смотреть клип", href: "/video/bulvar.mp4" },
       { label: "Instagram", href: INSTAGRAM },
