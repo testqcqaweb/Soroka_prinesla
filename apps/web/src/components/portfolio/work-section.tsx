@@ -25,7 +25,7 @@ export function WorkSection() {
               className="group relative overflow-hidden rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] transition-all hover:border-[var(--brand-crimson)]/40 hover:shadow-2xl hover:shadow-black/40"
             >
               <WorkIllustration item={item} variant="featured" />
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-crimson)]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--brand-crimson)]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="relative p-8">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -87,6 +87,10 @@ export function WorkSection() {
   );
 }
 
+function hasWorkMedia(item: WorkItem): boolean {
+  return Boolean(item.video || (item.gallery && item.gallery.length > 0) || item.image);
+}
+
 function WorkIllustration({
   item,
   variant,
@@ -94,6 +98,10 @@ function WorkIllustration({
   item: WorkItem;
   variant: "featured" | "compact";
 }) {
+  if (!hasWorkMedia(item)) {
+    return null;
+  }
+
   const isFeatured = variant === "featured";
 
   if (item.gallery && item.gallery.length > 0 && !item.video) {
@@ -109,7 +117,7 @@ function WorkIllustration({
       {item.video ? (
         <video
           src={assetPath(item.video)}
-          poster={assetPath(item.image)}
+          poster={item.image ? assetPath(item.image) : undefined}
           autoPlay
           muted
           loop
@@ -118,7 +126,7 @@ function WorkIllustration({
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           aria-label={`Видео проекта «${item.title}»`}
         />
-      ) : (
+      ) : item.image ? (
         <Image
           src={assetPath(item.image)}
           alt={`Иллюстрация проекта «${item.title}»`}
@@ -127,7 +135,7 @@ function WorkIllustration({
           sizes={isFeatured ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
           unoptimized
         />
-      )}
+      ) : null}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--brand-charcoal-soft)] via-transparent to-transparent opacity-80" />
     </div>
   );

@@ -10,7 +10,7 @@ describe("HeroSection", () => {
     render(<HeroSection />);
 
     expect(screen.getByRole("heading", { level: 1, name: /Кирилл Сорокин/i })).toBeInTheDocument();
-    expect(screen.getByText("Сценарист · Продюсер")).toBeInTheDocument();
+    expect(screen.getByText(/Сценарист · Продюсер · Менеджер по продажам/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Смотреть проекты" })).toHaveAttribute("href", "#work");
     expect(screen.getByRole("link", { name: "Написать мне" })).toHaveAttribute("href", "#contact");
     expect(screen.getByText("Открыт к новым проектам")).toBeInTheDocument();

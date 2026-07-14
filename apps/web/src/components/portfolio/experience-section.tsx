@@ -11,7 +11,7 @@ export function ExperienceSection() {
           className="mt-4 max-w-xl text-3xl font-medium text-[var(--brand-cream)] sm:text-4xl"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
-          Управление и организация
+          Опыт работы
         </h2>
 
         <div className="mt-12 space-y-4">

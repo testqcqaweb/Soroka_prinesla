@@ -21,11 +21,24 @@ describe("portfolio content", () => {
     expect(WORK.some((item) => item.featured)).toBe(true);
   });
 
-  it("provides illustrations and links for every project", () => {
+  it("provides links and real media when present", () => {
+    const galleryKeys = WORK.flatMap((item) => item.gallery ?? []);
+    expect(new Set(galleryKeys).size).toBe(galleryKeys.length);
+
     for (const item of WORK) {
-      expect(item.image).toMatch(/^\/work\/.+\.(svg|png|jpe?g|webp)$/);
       expect(item.links.length).toBeGreaterThan(0);
-      expect(item.links.every((link) => link.href.startsWith("https://") || link.href.startsWith("/books/") || link.href.startsWith("/video/"))).toBe(true);
+      expect(
+        item.links.every(
+          (link) =>
+            link.href.startsWith("https://") ||
+            link.href.startsWith("/books/") ||
+            link.href.startsWith("/video/"),
+        ),
+      ).toBe(true);
+
+      if (item.image) {
+        expect(item.image).toMatch(/^\/work\/.+\.(png|jpe?g|webp)$/);
+      }
     }
   });
 

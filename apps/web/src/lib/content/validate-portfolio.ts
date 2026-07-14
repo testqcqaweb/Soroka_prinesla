@@ -137,10 +137,17 @@ function validateWorkItem(item: WorkItem): PortfolioValidationIssue[] {
     issues.push({ field: `WORK.${item.slug}.tags`, message: "Нужен хотя бы один тег" });
   }
 
-  if (!item.image.startsWith("/work/")) {
+  if (item.image && !item.image.startsWith("/work/")) {
     issues.push({
       field: `WORK.${item.slug}.image`,
       message: "image должен указывать на файл в /work/",
+    });
+  }
+
+  if (item.image?.endsWith(".svg") || item.gallery?.some((image) => image.endsWith(".svg"))) {
+    issues.push({
+      field: `WORK.${item.slug}.media`,
+      message: "Не используйте SVG-заглушки — добавьте фото или уберите media",
     });
   }
 

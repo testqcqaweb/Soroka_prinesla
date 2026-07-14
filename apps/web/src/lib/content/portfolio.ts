@@ -2,11 +2,11 @@ export const SITE = {
   name: "Кирилл",
   surname: "Сорокин",
   fullName: "Кирилл Сорокин",
-  role: "Сценарист · Продюсер",
+  role: "Сценарист · Продюсер · Менеджер по продажам",
   birthDate: "24.05.1994",
   headline: "От первой строки до финального кадра",
   subheadline:
-    "Сценарист и продюсер с опытом создания поэтических проектов, управления командами и организации событий «под ключ». Работал в пяти странах и восьми разных сферах — от горячего цеха до режиссуры VHS-клипов.",
+    "Сценарист и продюсер с опытом творческих проектов и продаж. Управление командами, переговоры, организация событий «под ключ». Работал в пяти странах — от ресторанного сервиса до режиссуры VHS-клипов.",
   email: "testqcqaweb@gmail.com",
   phone: "+375 (29) 831-25-54",
   phoneHref: "tel:+375298312554",
@@ -32,9 +32,9 @@ export const HERO_FILM = {
 
 export const ABOUT = {
   bio: [
-    "Сценарист и продюсер с опытом создания поэтических проектов, управления командами и организации событий «под ключ».",
-    "Работал в пяти странах, в восьми разных сферах — от горячего цеха до режиссуры VHS-клипов. Умею превращать идею в готовый продукт: от концепта до реализации.",
-    "Владею визуальным языком — VHS-эстетика, Sony CCD-TRV67E, авторский монтаж. Открыт к коллаборациям на стыке поэзии, кино и живых форматов.",
+    "Сценарист, продюсер и менеджер по продажам. Совмещаю креативные проекты с клиентской работой: переговоры, презентации, закрытие сделок и сопровождение.",
+    "Работал в пяти странах и в разных сферах — от горячего цеха до режиссуры VHS-клипов. Умею доводить идею до результата: от концепта до реализации.",
+    "Владею визуальным языком — VHS-эстетика, Sony CCD-TRV67E, авторский монтаж. Открыт к новым проектам и коллаборациям.",
   ],
   stats: [
     { label: "Стран", value: "5" },
@@ -43,15 +43,15 @@ export const ABOUT = {
     { label: "Лет опыта", value: "12+" },
   ],
   competencies: [
+    "Продажи B2B / B2C: переговоры, презентации, закрытие сделок",
+    "CRM, воронка продаж, работа с клиентской базой",
     "Создание и продюсирование творческих проектов",
     "Организация поэтических (авторских) вечеров",
-    "Поэтические сборники, клипы, фестивали",
     "Режиссура и VHS-эстетика (Sony CCD-TRV67E)",
     "Управление командами до 15 человек",
     "Организация процессов с нуля",
     "Коммуникация и переговоры",
     "Notion · Obsidian · Cursor · Google Sheets",
-    "Вайбкодинг — поэзия и код",
   ],
   poeticEvenings: {
     title: "Организация поэтических (авторских) вечеров",
@@ -85,7 +85,7 @@ export type WorkItem = {
   role: string;
   description: string;
   tags: string[];
-  image: string;
+  image?: string;
   gallery?: string[];
   video?: string;
   links: WorkLink[];
@@ -95,11 +95,6 @@ export type WorkItem = {
 const INSTAGRAM = SITE.social.instagram.href;
 const TELEGRAM = SITE.social.telegram.href;
 const GITHUB_REPO = "https://github.com/testqcqaweb/Soroka_prinesla";
-
-const POETIC_EVENING_GALLERY = [
-  "/work/poetic-studio.png",
-  "/work/poetic-forest.png",
-] as const;
 
 export const WORK: WorkItem[] = [
   {
@@ -126,8 +121,8 @@ export const WORK: WorkItem[] = [
     role: "Автор · Продюсер",
     description: "Серия поэтических вечеров в Бресте — камерная атмосфера, живая поэзия, собственная концепция.",
     tags: ["поэзия", "ивент", "Брест"],
-    image: POETIC_EVENING_GALLERY[0],
-    gallery: [...POETIC_EVENING_GALLERY],
+    image: "/work/poetic-studio.png",
+    gallery: ["/work/poetic-studio.png", "/work/poetic-forest.png"],
     links: [
       { label: "Фото и анонсы в Instagram", href: INSTAGRAM },
       { label: "Telegram", href: TELEGRAM },
@@ -142,8 +137,6 @@ export const WORK: WorkItem[] = [
     role: "Автор · Организатор",
     description: "Камерные чтения — интимный формат встречи автора и слушателя.",
     tags: ["поэзия", "камерный формат"],
-    image: POETIC_EVENING_GALLERY[0],
-    gallery: [...POETIC_EVENING_GALLERY],
     links: [{ label: "Анонсы в Instagram", href: INSTAGRAM }],
   },
   {
@@ -170,7 +163,6 @@ export const WORK: WorkItem[] = [
     description:
       "Режиссура клипов на VHS (Sony CCD-TRV67E) для рок-фестиваля «Солнцестояние 2025».",
     tags: ["VHS", "клип", "фестиваль"],
-    image: "/work/vhs-solntsestanie.svg",
     links: [
       { label: "Смотреть на YouTube", href: "https://youtu.be/8Y3V2AOkXY4" },
       { label: "Instagram", href: INSTAGRAM },
@@ -184,7 +176,6 @@ export const WORK: WorkItem[] = [
     role: "Режиссёр",
     description: "Режиссура клипов на VHS для кафе «Бульвар» — авторский визуальный язык и монтаж.",
     tags: ["VHS", "клип", "Брест"],
-    image: "/work/vhs-bulvar.svg",
     video: "/video/bulvar.mp4",
     links: [
       { label: "Смотреть клип", href: "/video/bulvar.mp4" },
@@ -213,6 +204,16 @@ export type ExperienceItem = {
 };
 
 export const EXPERIENCE: ExperienceItem[] = [
+  {
+    title: "Менеджер по продажам",
+    place: "Брест",
+    period: "2022–2026",
+    points: [
+      "Ведение клиентов: от первого контакта до закрытия сделки",
+      "Переговоры, презентации продукта и работа с возражениями",
+      "Планирование воронки продаж и выполнение ключевых показателей",
+    ],
+  },
   {
     title: "Наёмный директор",
     place: "Бар «Кабакъ», Брест",
