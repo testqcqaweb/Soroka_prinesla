@@ -163,6 +163,7 @@ export const WORK: WorkItem[] = [
     description:
       "Режиссура клипов на VHS (Sony CCD-TRV67E) для рок-фестиваля «Солнцестояние 2025».",
     tags: ["VHS", "клип", "фестиваль"],
+    image: "/work/vhs-solntsestanie.png",
     links: [
       { label: "Смотреть на YouTube", href: "https://youtu.be/8Y3V2AOkXY4" },
       { label: "Instagram", href: INSTAGRAM },

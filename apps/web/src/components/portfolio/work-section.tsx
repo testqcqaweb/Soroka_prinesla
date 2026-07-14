@@ -6,6 +6,8 @@ import { WORK, type WorkItem } from "@/lib/content/portfolio";
 export function WorkSection() {
   const featured = WORK.filter((w) => w.featured);
   const rest = WORK.filter((w) => !w.featured);
+  const withMedia = rest.filter(hasWorkMedia);
+  const textOnly = rest.filter((w) => !hasWorkMedia(w));
 
   return (
     <section id="work" className="section-padding border-t border-white/8 bg-[var(--brand-charcoal-soft)]/50">
@@ -18,67 +20,24 @@ export function WorkSection() {
           Избранные творческие проекты
         </h2>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="mt-12 grid items-start gap-6 lg:grid-cols-2">
           {featured.map((item) => (
-            <article
-              key={item.slug}
-              className="group relative overflow-hidden rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] transition-all hover:border-[var(--brand-crimson)]/40 hover:shadow-2xl hover:shadow-black/40"
-            >
-              <WorkIllustration item={item} variant="featured" />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--brand-crimson)]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              <div className="relative p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-widest text-[var(--brand-crimson)]">
-                      {item.type}
-                      {item.year ? ` · ${item.year}` : ""}
-                    </p>
-                    <h3
-                      className="mt-2 text-2xl font-medium text-[var(--brand-cream)]"
-                      style={{ fontFamily: "var(--font-playfair), serif" }}
-                    >
-                      {item.title}
-                    </h3>
-                  </div>
-                  <span className="shrink-0 rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--brand-muted)]">
-                    {item.role}
-                  </span>
-                </div>
-                <p className="mt-4 leading-relaxed text-[var(--brand-muted)]">{item.description}</p>
-                <ProjectLinks item={item} />
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md bg-white/5 px-2.5 py-0.5 text-xs text-[var(--brand-muted)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
+            <FeaturedCard key={item.slug} item={item} />
           ))}
         </div>
 
-        {rest.length > 0 && (
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {rest.map((item) => (
-              <article
-                key={item.slug}
-                className="group overflow-hidden rounded-xl border border-white/8 bg-[var(--brand-charcoal)] transition-colors hover:border-white/15"
-              >
-                <WorkIllustration item={item} variant="compact" />
-                <div className="p-6">
-                  <p className="text-xs text-[var(--brand-crimson)]">
-                    {item.type}
-                    {item.year ? ` · ${item.year}` : ""}
-                  </p>
-                  <h3 className="mt-1 font-medium text-[var(--brand-cream)]">{item.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-[var(--brand-muted)]">{item.description}</p>
-                  <ProjectLinks item={item} compact />
-                </div>
-              </article>
+        {withMedia.length > 0 && (
+          <div className="mt-6 grid items-start gap-4 sm:grid-cols-2">
+            {withMedia.map((item) => (
+              <MediaCard key={item.slug} item={item} />
+            ))}
+          </div>
+        )}
+
+        {textOnly.length > 0 && (
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {textOnly.map((item) => (
+              <TextOnlyCard key={item.slug} item={item} />
             ))}
           </div>
         )}
@@ -87,8 +46,75 @@ export function WorkSection() {
   );
 }
 
+function FeaturedCard({ item }: { item: WorkItem }) {
+  return (
+    <article className="group relative self-start overflow-hidden rounded-2xl border border-white/8 bg-[var(--brand-charcoal-soft)] transition-all hover:border-[var(--brand-crimson)]/40 hover:shadow-2xl hover:shadow-black/40">
+      <WorkIllustration item={item} variant="featured" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--brand-crimson)]/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="relative p-8">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-[var(--brand-crimson)]">
+              {item.type}
+              {item.year ? ` · ${item.year}` : ""}
+            </p>
+            <h3
+              className="mt-2 text-2xl font-medium text-[var(--brand-cream)]"
+              style={{ fontFamily: "var(--font-playfair), serif" }}
+            >
+              {item.title}
+            </h3>
+          </div>
+          <span className="shrink-0 rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-wider text-[var(--brand-muted)]">
+            {item.role}
+          </span>
+        </div>
+        <p className="mt-4 leading-relaxed text-[var(--brand-muted)]">{item.description}</p>
+        <ProjectLinks item={item} />
+        <div className="mt-6 flex flex-wrap gap-2">
+          {item.tags.map((tag) => (
+            <span key={tag} className="rounded-md bg-white/5 px-2.5 py-0.5 text-xs text-[var(--brand-muted)]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MediaCard({ item }: { item: WorkItem }) {
+  return (
+    <article className="group self-start overflow-hidden rounded-xl border border-white/8 bg-[var(--brand-charcoal)] transition-colors hover:border-white/15">
+      <WorkIllustration item={item} variant="compact" />
+      <div className="p-5">
+        <p className="text-xs text-[var(--brand-crimson)]">
+          {item.type}
+          {item.year ? ` · ${item.year}` : ""}
+        </p>
+        <h3 className="mt-1 font-medium text-[var(--brand-cream)]">{item.title}</h3>
+        <p className="mt-2 line-clamp-2 text-sm text-[var(--brand-muted)]">{item.description}</p>
+        <ProjectLinks item={item} compact />
+      </div>
+    </article>
+  );
+}
+
+function TextOnlyCard({ item }: { item: WorkItem }) {
+  return (
+    <article className="rounded-xl border border-white/8 bg-[var(--brand-charcoal)]/80 px-4 py-4 transition-colors hover:border-white/15">
+      <p className="text-[11px] text-[var(--brand-crimson)]">
+        {item.type}
+        {item.year ? ` · ${item.year}` : ""}
+      </p>
+      <h3 className="mt-1 text-sm font-medium text-[var(--brand-cream)]">{item.title}</h3>
+      <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-[var(--brand-muted)]">{item.description}</p>
+      <ProjectLinks item={item} compact />
+    </article>
+  );
+}
+
 function hasWorkMedia(item: WorkItem): boolean {
-  // Реальные фото/галерея/видео; без медиа — без пустого блока
   if (item.gallery && item.gallery.length > 0) return true;
   if (item.video) return true;
   if (item.image && !item.image.endsWith(".svg")) return true;
@@ -159,7 +185,7 @@ function ProjectLinks({ item, compact }: { item: WorkItem; compact?: boolean }) 
   }
 
   return (
-    <ul className={`flex flex-wrap gap-x-4 gap-y-2 ${compact ? "mt-3" : "mt-4"}`}>
+    <ul className={`flex flex-wrap gap-x-4 gap-y-2 ${compact ? "mt-2" : "mt-4"}`}>
       {item.links.map((link) => (
         <li key={`${item.slug}-${link.href}`}>
           <a
