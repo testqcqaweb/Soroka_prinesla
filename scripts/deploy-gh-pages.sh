@@ -6,8 +6,12 @@ OUT="$ROOT/apps/web/out"
 
 echo "→ Building static site for GitHub Pages..."
 cd "$ROOT/apps/web"
-GITHUB_PAGES=true npm run build
-cp out/index.html out/404.html
+GITHUB_PAGES=true npm run build:pages
+
+if [[ ! -f "$OUT/404.html" ]]; then
+  echo "✗ Expected out/404.html from Next.js not-found page" >&2
+  exit 1
+fi
 
 echo "→ Publishing to gh-pages branch..."
 cd "$OUT"

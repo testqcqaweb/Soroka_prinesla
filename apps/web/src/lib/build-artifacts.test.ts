@@ -21,5 +21,10 @@ describe("GitHub Pages build artifacts", () => {
     expect(html).toContain(`${REPO_BASE_PATH}/_next/static/`);
     expect(html).not.toMatch(/Santa Prod/i);
     expect(html).toContain("soroka prinesla");
+
+    const notFound = readFileSync(path.join(OUT_DIR, "404.html"), "utf8");
+    expect(notFound).toContain("Сорока принесла");
+    expect(notFound).toContain("404");
+    expect(notFound).not.toContain("Избранные творческие проекты");
   });
 });
