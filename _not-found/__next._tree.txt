@@ -1,2 +1,2 @@
-:HL["/Soroka_prinesla/_next/static/chunks/1n4z-nhnt4jf7.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"6N1zo88G7g0qg1tx4cFju"}
+:HL["/Soroka_prinesla/_next/static/chunks/17e4_rew7cvp3.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"pdul86HdkS9C2OD7muYrl"}
