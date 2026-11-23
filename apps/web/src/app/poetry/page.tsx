@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Стихи — Кирилл Сорокин",
+  description:
+    "Стихи Кирилла Сорокина — примеры работ и цифровой двойник: его книга «Стих есть» и бот @sorokaprinesla_ai",
+};
+
 const POEMS: Array<{ title: string; text: string }> = [
   {
     title: "Вы встретились недавно, снова",
