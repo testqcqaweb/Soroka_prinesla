@@ -292,6 +292,7 @@ export const BACKSTAGE = {
 export const NAV = [
   { href: "#about", label: "Обо мне" },
   { href: "#work", label: "Проекты" },
+  { href: "/poetry", label: "Стихи" },
   { href: "#experience", label: "Опыт" },
   { href: "#services", label: "Услуги" },
   { href: "#contact", label: "Контакт" },

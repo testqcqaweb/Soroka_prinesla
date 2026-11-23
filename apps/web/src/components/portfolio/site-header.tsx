@@ -7,6 +7,7 @@ import { NAV } from "@/lib/content/portfolio";
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -30,7 +31,7 @@ export function SiteHeader() {
           {NAV.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={basePath + item.href}
               className="rounded-lg px-3 py-1.5 text-sm text-[var(--brand-cream)]/70 transition-colors hover:bg-white/5 hover:text-[var(--brand-cream)]"
             >
               {item.label}
@@ -39,7 +40,7 @@ export function SiteHeader() {
         </nav>
 
         <a
-          href="#contact"
+          href={basePath + "#contact"}
           className="hidden rounded-lg bg-[var(--brand-crimson)] px-4 py-2 text-sm font-medium text-[var(--brand-cream)] transition-colors hover:bg-[var(--brand-crimson-dark)] md:inline-flex"
         >
           Связаться
@@ -60,7 +61,7 @@ export function SiteHeader() {
           {NAV.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={basePath + item.href}
               onClick={() => setOpen(false)}
               className="block rounded-lg px-3 py-2 text-sm text-[var(--brand-cream)]/80 hover:bg-white/5"
             >
@@ -68,7 +69,7 @@ export function SiteHeader() {
             </a>
           ))}
           <a
-            href="#contact"
+            href={basePath + "#contact"}
             onClick={() => setOpen(false)}
             className="mt-2 block rounded-lg bg-[var(--brand-crimson)] px-3 py-2 text-center text-sm font-medium text-[var(--brand-cream)]"
           >
